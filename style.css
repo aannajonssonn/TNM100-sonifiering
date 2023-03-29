@@ -1,97 +1,96 @@
 body {
-    background-color: lightblue;
-    margin: 0;
-  }
+  background-color: lightblue;
+  margin: 0;
+}
 
 #left {
-    background-color: lightgreen;
-    float: left;
-    width: 70%;
-    padding: 10px;
-    height: 100vh;
+  background-color: lightgreen;
+  float: left;
+  width: 70%;
+  padding: 10px;
+  height: 100vh;
 }
 
 #right {
-    background-color: blanchedalmond;
-    float: left;
-    width: 30%;
-    padding: 10px;
-    height: 100vh;
+  background-color: blanchedalmond;
+  float: left;
+  width: 30%;
+  padding: 10px;
+  height: 100vh;
 }
 
 #header {
-    background-color: red;
-    border: 1px solid black;
-    padding: 10px;
-    margin: 1vh auto 1vh auto;
-    width: 95%;
-    height: 25vh;
-    overflow: auto;
-  }
-
-#graph {
-    background-color: white;
-    border: 1px solid black;
-    padding: 10px;
-    margin: 1vh auto 1vh auto;
-    width: 95%;
-    height: 70vh;
-    overflow: auto;
-  }
-
-#data {
-    background-color: pink;
-    border: 1px solid black;
-    padding: 10px;
-    margin: 1vh auto 1vh auto;
-    width: 90%;
-    height: 25vh;
-    overflow: auto;
-  }
-
-#settings {
-    background-color: green;
-    border: 1px solid black;
-    padding: 10px;
-    margin: 1vh auto 1vh auto;
-    width: 90%;
-    height: 70vh;
-    overflow: auto;
-
-  }
-
-.title{
-    background-color: turquoise;
-    padding: 10px;
-    margin: 0.7% auto 0.7% auto;
-    height: 5%;
-    width: 90%;
+  background-color: red;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 1vh auto 1vh auto;
+  width: 95%;
+  height: 25vh;
+  overflow: auto;
 }
 
-.carousell{
+#graph {
+  background-color: white;
+  border: 1px solid black;
+  margin: 1vh auto 1vh auto;
+  width: 95%;
+  height: 70vh;
+  overflow: auto;
+}
+
+#data {
+  background-color: pink;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 1vh auto 1vh auto;
+  width: 90%;
+  height: 25vh;
+  overflow: auto;
+}
+
+#settings {
+  background-color: green;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 1vh auto 1vh auto;
+  width: 90%;
+  height: 70vh;
+  overflow: auto;
+
+}
+
+.title {
+  background-color: turquoise;
+  padding: 10px;
+  margin: 0.7% auto 0.7% auto;
+  height: 5%;
+  width: 100%;
+}
+
+/*.carousell{
     background-color: orange;
     padding: 10px;
     margin: 0.7% auto 0.7% auto;
     height: 15%;
     width: 90%;
+}*/
+
+.onoff {
+  background-color: rgb(253, 0, 101);
+  padding: 10px;
+  margin: 0.7% auto 0.7% auto;
+  height: 10%;
+  width: 100%;
 }
 
-.onoff{
-    background-color: rgb(253, 0, 101);
-    padding: 10px;
-    margin: 0.7% auto 0.7% auto;
-    height: 10%;
-    width: 90%;
+
+* {
+  box-sizing: border-box;
 }
 
-
-  * {
-    box-sizing: border-box;
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

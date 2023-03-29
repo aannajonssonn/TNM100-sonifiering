@@ -4,8 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>Sonifiering</title>
+    <link rel="stylesheet" type="text/css" href="carousel.css">
+    <link rel="stylesheet" type="text/css" href="datasets.css">
     <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body>
@@ -26,15 +30,49 @@
         <div id="right">
             <div id="data">
                 <div class="title"></div>
-                <div id="datasets"></div>
+                <div class="datasets">
+                    <ul id="datasets_list"></ul>
+                </div>
             </div>
 
             <div id="settings">
                 <div class="title"></div>
-                <div id="waveform" class="carousell"></div>
-                <div id="genre" class="carousell"></div>
-                <div id="sound" class="carousell"></div>
-                <div id="filter" class="carousell"></div>
+                <div id="waveform" class="carousel">
+                    <ul class="carousel__list">
+                        <li class="carousel__item" data-pos="-2"></li>
+                        <li class="carousel__item" data-pos="-1"></li>
+                        <li class="carousel__item" data-pos="0"></li>
+                        <li class="carousel__item" data-pos="1"></li>
+                        <li class="carousel__item" data-pos="2"></li>
+                    </ul>
+                </div>
+                <div id="genre" class="carousel">
+                    <ul class="carousel__list">
+                        <li class="carousel__item" data-pos="-2"></li>
+                        <li class="carousel__item" data-pos="-1"></li>
+                        <li class="carousel__item" data-pos="0"></li>
+                        <li class="carousel__item" data-pos="1"></li>
+                        <li class="carousel__item" data-pos="2"></li>
+                    </ul>
+                </div>
+                <div id="sound" class="carousel">
+                    <ul class="carousel__list">
+                        <li class="carousel__item" data-pos="-2"></li>
+                        <li class="carousel__item" data-pos="-1"></li>
+                        <li class="carousel__item" data-pos="0"></li>
+                        <li class="carousel__item" data-pos="1"></li>
+                        <li class="carousel__item" data-pos="2"></li>
+                    </ul>
+                </div>
+                <div id="filter" class="carousel">
+                    <ul class="carousel__list">
+                        <li class="carousel__item" data-pos="-2"></li>
+                        <li class="carousel__item" data-pos="-1"></li>
+                        <li class="carousel__item" data-pos="0"></li>
+                        <li class="carousel__item" data-pos="1"></li>
+                        <li class="carousel__item" data-pos="2"></li>
+                    </ul>
+                </div>
                 
                 <div id="mirror" class="onoff"></div>
                 <div id="echo" class="onoff"></div>
@@ -43,8 +81,8 @@
             </div>
         </div>
     </div>
-
-    <script src="https://d3js.org/d3.v7.min.js"></script>
 </body>
-
+<script src="carousel.js"></script>
+<script src="graph.js"></script>
+<script src="datasets.js"></script>
 </html>
