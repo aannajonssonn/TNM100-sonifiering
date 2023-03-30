@@ -56,7 +56,6 @@ body {
   width: 90%;
   height: 70vh;
   overflow: auto;
-
 }
 
 .title {
@@ -66,14 +65,6 @@ body {
   height: 5%;
   width: 100%;
 }
-
-/*.carousell{
-    background-color: orange;
-    padding: 10px;
-    margin: 0.7% auto 0.7% auto;
-    height: 15%;
-    width: 90%;
-}*/
 
 .onoff {
   background-color: rgb(253, 0, 101);
