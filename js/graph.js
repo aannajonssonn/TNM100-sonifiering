@@ -20,7 +20,8 @@ const svg = d3.select("#graph")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
 // Read the data, temporary
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
+//d3.csv("data/testdata.csv",
+d3.csv("data/temperature.csv",
 
   // Format time variable for x axis
   function (d) {
@@ -38,8 +39,9 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
         .call(d3.axisBottom(x))
 
       // Add Y axis
+      const yMin = d3.min(data, function (d) { return +d.value })
       const y = d3.scaleLinear()
-        .domain([0, d3.max(data, function (d) { return +d.value })])
+        .domain([yMin - 0.5 * Math.abs(yMin), d3.max(data, function (d) { return +d.value })])
         .range([height, margin.top])
       svg.append("g")
         .call(d3.axisLeft(y))
