@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/carousel.css">
     <link rel="stylesheet" type="text/css" href="css/datasets.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/onoff.css">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -73,8 +74,13 @@
                         <li class="carousel__item" data-pos="2"></li>
                     </ul>
                 </div>
-                
-                <div id="mirror" class="onoff"></div>
+
+                <div id="mirror" class="onoff">
+                    <label class="switch">
+                        <input type="checkbox" id="mirror-button">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
                 <div id="echo" class="onoff"></div>
                 <div id="reverb" class="onoff"></div>
 
@@ -85,4 +91,5 @@
 <script src="js/carousel.js"></script>
 <script src="js/graph.js"></script>
 <script src="js/datasets.js"></script>
+<script src="js/onoff.js"></script>
 </html>
