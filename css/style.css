@@ -3,59 +3,52 @@ body {
   margin: 0;
 }
 
-#left {
-  background-color: lightgreen;
+/* Divide screen into two parts */
+.column {
   float: left;
-  width: 70%;
   padding: 10px;
   height: 100vh;
+}
+
+#left {
+  background-color: lightgreen;
+  width: 70%;
 }
 
 #right {
   background-color: blanchedalmond;
-  float: left;
   width: 30%;
+}
+
+.box {
+  border: 1px solid black;
+  margin: 1vh auto 1vh auto;
+  overflow: auto;
   padding: 10px;
-  height: 100vh;
+  width: 95%;
 }
 
 #header {
   background-color: red;
-  border: 1px solid black;
-  padding: 10px;
-  margin: 1vh auto 1vh auto;
-  width: 95%;
   height: 25vh;
-  overflow: auto;
 }
 
 #graph {
   background-color: white;
-  border: 1px solid black;
-  margin: 1vh auto 1vh auto;
-  width: 95%;
+  padding: 0;
   height: 70vh;
-  overflow: auto;
 }
 
 #data {
   background-color: pink;
-  border: 1px solid black;
-  padding: 10px;
-  margin: 1vh auto 1vh auto;
   width: 90%;
   height: 25vh;
-  overflow: auto;
 }
 
 #settings {
   background-color: green;
-  border: 1px solid black;
-  padding: 10px;
-  margin: 1vh auto 1vh auto;
   width: 90%;
   height: 70vh;
-  overflow: auto;
 }
 
 .title {
@@ -65,15 +58,6 @@ body {
   height: 5%;
   width: 100%;
 }
-
-.onoff {
-  background-color: gainsboro;
-  padding: 10px;
-  margin: 0.7% auto 0.7% auto;
-  height: 10%;
-  width: 100%;
-}
-
 
 * {
   box-sizing: border-box;
