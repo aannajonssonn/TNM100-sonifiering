@@ -5,9 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sonifiering</title>
-    <link rel="stylesheet" type="text/css" href="carousel.css">
-    <link rel="stylesheet" type="text/css" href="datasets.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/carousel.css">
+    <link rel="stylesheet" type="text/css" href="css/datasets.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/onoff.css">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -15,27 +16,27 @@
 <body>
     <div class="row">
         <!-- Vänster halva-->
-        <div id="left">
-            <div id="header">
+        <div class="column" id="left">
+            <div class="box" id="header">
                 <div class="title">
                     <h1>Sonifiering</h1>
                 </div>
                 <div></div>
 
             </div>
-            <div id="graph"></div>
+            <div class="box" id="graph"></div>
         </div>
 
         <!-- Höger halva-->
-        <div id="right">
-            <div id="data">
+        <div class="column" id="right">
+            <div class="box" id="data">
                 <div class="title"></div>
                 <div class="datasets">
                     <ul id="datasets_list"></ul>
                 </div>
             </div>
 
-            <div id="settings">
+            <div class="box" id="settings">
                 <div class="title"></div>
                 <div id="waveform" class="carousel">
                     <ul class="carousel__list">
@@ -73,8 +74,13 @@
                         <li class="carousel__item" data-pos="2"></li>
                     </ul>
                 </div>
-                
-                <div id="mirror" class="onoff"></div>
+
+                <div id="mirror" class="onoff">
+                    <label class="switch">
+                        <input type="checkbox" id="mirror-button">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
                 <div id="echo" class="onoff"></div>
                 <div id="reverb" class="onoff"></div>
 
@@ -82,7 +88,8 @@
         </div>
     </div>
 </body>
-<script src="carousel.js"></script>
-<script src="graph.js"></script>
-<script src="datasets.js"></script>
+<script src="js/carousel.js"></script>
+<script src="js/graph.js"></script>
+<script src="js/datasets.js"></script>
+<script src="js/onoff.js"></script>
 </html>
