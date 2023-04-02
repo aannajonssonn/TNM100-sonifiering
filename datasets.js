@@ -7,6 +7,7 @@ data.forEach((item)=>{
   let li = document.createElement("li");
   var button = document.createElement("button");
   button.innerText = item;
+  button.onclick = '';
   li.appendChild(button);
   list.appendChild(li);
 })
