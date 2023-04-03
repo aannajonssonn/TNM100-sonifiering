@@ -18,7 +18,7 @@ body {
   width: 100%;
   align-items: center;
   font-family: Arial;
-  
+
 }
 
 .carousel__list {
@@ -29,7 +29,7 @@ body {
   height: 100%;
   perspective: 100%;
   justify-content: center;
-  background-color: chartreuse;
+  background-color:  #0A1128;
 }
 
 .carousel__item {
@@ -47,19 +47,23 @@ body {
 }
 
 /* Style of each carousel list */
-#waveform > ul > li {
-  background: linear-gradient(45deg, #2D35EB 0%, #904ED4 100%);
+#waveform>ul>:nth-child(1) {
+  background-color: orange;
+  background-image: url("../images/star.png");
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
 }
 
-#genre > ul > li {
+#genre>ul>li {
   background: linear-gradient(45deg, #2D35EB 0%, #fdbb2d 100%);
 }
 
-#sound > ul > li {
+#sound>ul>li {
   background: linear-gradient(45deg, #2D35EB 0%, #22c1c3 100%);
 }
 
-#filter > ul > li {
+#filter>ul>li {
   background: linear-gradient(45deg, #22c1c3 0%, #904ED4 100%);
 }
 

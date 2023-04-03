@@ -1,14 +1,16 @@
 .onoff {
-    background-color: gainsboro;
+    background-color: #0A1128;
     padding: 10px;
     margin: 0.7% auto 0.7% auto;
     height: 10%;
     width: 100%;
+    color: white;
 }
 
 .switch {
+    display: table;
     position: relative;
-    display: inline-block;
+    float: right;
     width: 60px;
     height: 34px;
 }

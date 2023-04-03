@@ -1,5 +1,5 @@
 body {
-  background-color: lightblue;
+  background-color: rgb(0, 0, 0);
   margin: 0;
 }
 
@@ -11,12 +11,12 @@ body {
 }
 
 #left {
-  background-color: lightgreen;
+  background-color: #000000;
   width: 70%;
 }
 
 #right {
-  background-color: blanchedalmond;
+  background-color: #000000;
   width: 30%;
 }
 
@@ -29,7 +29,7 @@ body {
 }
 
 #header {
-  background-color: red;
+  background-color: #0A1128;
   height: 25vh;
 }
 
@@ -40,23 +40,23 @@ body {
 }
 
 #data {
-  background-color: pink;
+  background-color: #0A1128;
   width: 90%;
   height: 25vh;
 }
 
 #settings {
-  background-color: green;
+  background-color: #0A1128;
   width: 90%;
   height: 70vh;
 }
 
 .title {
-  background-color: turquoise;
-  padding: 10px;
-  margin: 0.7% auto 0.7% auto;
-  height: 5%;
+  background-color: #0A1128;
+  margin: 0.2% auto 0.2% auto;
+  height: auto;
   width: 100%;
+  color: white;
 }
 
 * {
@@ -80,12 +80,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #d6dee1;
+  background-color:  rgb(55, 58, 68);
   border-radius: 20px;
   border: 6px solid transparent;
   background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #a8bbbf;
+  background-color: rgb(99, 104, 117);
 }
