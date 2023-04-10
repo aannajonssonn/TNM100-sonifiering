@@ -1,3 +1,6 @@
+:root {
+  --car-col: #2D35EB;
+}
 
 .carousel {
   display: flex;
@@ -34,7 +37,7 @@
 
 /* Style of each carousel list */
 #waveform>ul>:nth-child(1) {
-  background-color: #2D35EB;;
+  background-color: var(--car-col);
   background-image: url("../images/star.png");
   background-repeat: no-repeat;
   background-size: 70%;
@@ -43,17 +46,17 @@
 
 #genre>ul>li {
   /*background: linear-gradient(45deg, #2D35EB 0%, #fdbb2d 100%);*/
-  background-color: #2D35EB;
+  background-color: var(--car-col);
 }
 
 #sound>ul>li {
   /*background: linear-gradient(45deg, #2D35EB 0%, #22c1c3 100%);*/
-  background-color: #2D35EB;
+  background-color: var(--car-col);
 }
 
 #filter>ul>li {
   /*background: linear-gradient(45deg, #22c1c3 0%, #904ED4 100%);*/
-  background-color: #2D35EB;
+  background-color: var(--car-col);
 }
 
 /*.carousel__item:nth-child(1) {
