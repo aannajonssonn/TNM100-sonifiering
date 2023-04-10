@@ -1,10 +1,12 @@
 .onoff {
-    background-color: #0A1128;
+    /*background-color: #0A1128;*/
     padding: 10px;
     margin: 0.7% auto 0.7% auto;
     height: 10%;
     width: 100%;
-    color: white;
+    font-family: Yeseva One, Lora, Nunito Sans, sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
 }
 
 .switch {
