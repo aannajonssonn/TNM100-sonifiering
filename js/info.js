@@ -32,6 +32,7 @@ temp.forEach(element => {
             element.infoElement.style.textAlign = ''
             element.infoElement.style.border = ''
             element.infoElement.style.top = -20 + 'px'
+            element.infoElement.style.boxShadow = ''
             element.clicked = false
             return
         }
@@ -46,6 +47,7 @@ temp.forEach(element => {
             elem.infoElement.style.textAlign = ''
             elem.infoElement.style.border = ''
             elem.infoElement.style.top = -20 + 'px'
+            element.infoElement.style.boxShadow = ''
             elem.clicked = false
         })
 
@@ -57,6 +59,7 @@ temp.forEach(element => {
         element.infoElement.style.height = 'fit-content'
         element.infoElement.style.textAlign = 'left!important'
         element.infoElement.style.border = '1px solid black'
+        element.infoElement.style.boxShadow = '4px 4px 10px rgba(0, 0, 0, 0.6)'
         element.clicked = true
 
         setTimeout(function () {
