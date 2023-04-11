@@ -29,7 +29,6 @@ d3.csv('data/temperature.csv',
   }).then(
 
     function (data) {
-
       // Add X axis --> it is a date format
       const x = d3.scaleTime()
         .domain(d3.extent(data, function (d) { return d.date }))
@@ -39,16 +38,17 @@ d3.csv('data/temperature.csv',
         .attr('transform', 'translate(0,' + height + ')')
         .call(d3.axisBottom(x))
 
+      // Axis labels
       svg.append('text')
         .attr('x', -40)
         .attr('y', 5)
-        .text('Temperatur °C')
+        .text(data.columns[2])
 
       svg.append('text')
         .attr('x', width)
         .attr('y', height - 5)
         .style('text-anchor', 'end')
-        .text('Årtal')
+        .text(data.columns[3])
 
       // Add Y axis
       const yMin = d3.min(data, function (d) { return +d.value })
