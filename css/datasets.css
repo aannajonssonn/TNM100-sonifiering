@@ -13,6 +13,9 @@
   /* Pointer/hand icon */
   width: 100%;
   /* Set a width if needed */
-  display: block;
+display : inline-block;
+    /* put text left side middle */
+  text-align: left;
+  vertical-align: middle;
   /* Make the buttons appear below each other */
 }
