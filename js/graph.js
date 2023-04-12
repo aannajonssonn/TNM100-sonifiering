@@ -68,4 +68,35 @@ d3.csv('data/temperature.csv',
           .x(function (d) { return x(d.date) })
           .y(function (d) { return y(d.value) })
         )
+
+      // Code inspired by https://observablehq.com/@vica/d3-linechart-with-hover
+      // Temp styling for debugging, remove later
+      const plot_g = svg//d3.select('#graph')
+      const mouse_g = plot_g.append('g').classed('mouse', true).style('display', 'none')
+      mouse_g.append('rect').attr('width', 2).attr('x', -1).attr('height', height).attr('fill', 'lightgray')
+      mouse_g.append('circle').attr('r', 3).attr("stroke", "steelblue")
+      mouse_g.append('text')
+
+      plot_g.on("mouseover", function (mouse) {
+        mouse_g.style('display', 'block')
+      })
+
+      const [minYear, maxYear] = d3.extent(data, d => d.date)
+      plot_g.on('mousemove', function (mouse) {
+
+        const [xCoord, yCoord] = d3.pointer(mouse)
+        const ratio = xCoord / width
+        const formatTime = d3.timeFormat('%Y')
+        const parseTime = d3.timeParse('%Y')
+        const currentYear = parseInt(formatTime(minYear)) + parseInt(Math.round(ratio * d3.timeYear.count(minYear, maxYear))) // https://github.com/d3/d3-time
+        const currentValue = data.find(d => {
+          return formatTime(d.date) == currentYear
+        }).value
+        mouse_g.attr('transform', `translate(${x(parseTime(currentYear))},${0})`)
+        mouse_g.select('text')
+          .text(`year: ${currentYear}`)
+          .attr('y', 100)
+          .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? "start" : "end")
+        mouse_g.select('circle').attr('cy', y(currentValue))
+      })
     })
