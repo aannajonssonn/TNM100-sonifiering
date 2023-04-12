@@ -20,12 +20,12 @@ const svg = d3.select('#graph')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
 // Read the data, temporary
-//d3.csv('data/testdata.csv',
+//d3.csv('data/testdata.csv', // Temporarily broken
 d3.csv('data/temperature.csv',
 
   // Format time variable for x axis
   function (d) {
-    return { date: d3.timeParse('%Y-%m-%d')(d.date), value: d.value }
+    return { date: d3.timeParse('%Y')(d.date), value: d.value }
   }).then(
 
     function (data) {
