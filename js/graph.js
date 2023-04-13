@@ -78,7 +78,7 @@ d3.csv('data/temperature.csv',
       mouse_g.append('circle').attr('r', 3).attr("stroke", "steelblue")
       mouse_g.append('text')
 
-      plot_g.on("mouseover", function (mouse) {
+      canvas.on("mouseover", function (mouse) {
         mouse_g.style('display', 'block')
       })
 
