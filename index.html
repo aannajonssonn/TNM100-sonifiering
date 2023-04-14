@@ -5,10 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sonifiering</title>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/carousel.css">
     <link rel="stylesheet" type="text/css" href="css/datasets.css">
     <link rel="stylesheet" type="text/css" href="css/onoff.css">
+    <link rel="stylesheet" type="text/css" href="css/info.css">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -109,6 +112,13 @@
                         <input type="checkbox" id="mirror-button">
                         <span class="slider round"></span>
                     </label>
+                    <div class="info expand-down">
+                        <i class="icon-info-sign"></i>
+                        <div class="extra-info">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                molestiae quas vel sint commodi repudiandae</p>
+                        </div>
+                    </div>
                 </div>
                 <div id="echo" class="onoff">
                     Eko
@@ -116,6 +126,12 @@
                         <input type="checkbox" id="echo-button">
                         <span class="slider round"></span>
                     </label>
+                    <div class="info expand-down">
+                        <i class="icon-info-sign"></i>
+                        <div class="extra-info">
+                            Extra info text
+                        </div>
+                    </div>
                 </div>
 
                 <div id="reverb" class="onoff">
@@ -124,6 +140,12 @@
                         <input type="checkbox" id="reverb-button">
                         <span class="slider round"></span>
                     </label>
+                    <div class="info expand-down">
+                        <i class="icon-info-sign"></i>
+                        <div class="extra-info">
+                            Extra info text
+                        </div>
+                    </div>
                 </div>
 
                 <div id="volume" class="onoff">
@@ -132,14 +154,32 @@
                         <input type="checkbox" id="volume-button">
                         <span class="slider round"></span>
                     </label>
+                    <div class="info expand-down">
+                        <i class="icon-info-sign"></i>
+                        <div class="extra-info">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                                numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                                optio, eaque rerum!</p>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <div id="discrete" class="onoff">
                     Diskreta steg
                     <label class="switch">
                         <input type="checkbox" id="discrete-button">
                         <span class="slider round"></span>
                     </label>
+                    <div class="info expand-up">
+                        <i class="icon-info-sign"></i>
+                        <div class="extra-info">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                                numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                                optio, eaque rerum!</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -150,6 +190,7 @@
 <script src="js/graph.js"></script>
 <script src="js/datasets.js"></script>
 <script src="js/onoff.js"></script>
+<script src="js/info.js"></script>
 
 
 </html>
