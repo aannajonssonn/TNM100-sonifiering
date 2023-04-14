@@ -1,5 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;400;600;700&display=swap');
+
+:root {
+  --background-col: #020214;
+  --font-col: white;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Mulish, Noto Serif, Source Sans Pro, Nunito Sans, sans-serif;
+  color: var(--font-col);
+}
+
+h1, h2, h3, h4{
+  font-family: Yeseva One, Lora, Nunito Sans, sans-serif; 
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-color: rgb(0, 0, 0);
+  background-color: var(--background-col);
+  /*background-image: url("background.jpg");
+  background-attachment: fixed;*/
   margin: 0;
 }
 
@@ -11,56 +36,55 @@ body {
 }
 
 #left {
-  background-color: #000000;
   width: 70%;
 }
 
 #right {
-  background-color: #000000;
   width: 30%;
 }
 
 .box {
-  border: 1px solid black;
+  border: 0px solid black;
   margin: 1vh auto 1vh auto;
   overflow: auto;
   padding: 10px;
   width: 95%;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.1px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 #header {
-  background-color: #0A1128;
   height: 25vh;
+  border-radius: 15px;
 }
 
 #graph {
-  background-color: white;
+  background: rgba(255, 255, 255, 0.15);
   padding: 0;
   height: 70vh;
+  border-radius: 15px;
 }
 
 #data {
-  background-color: #0A1128;
   width: 90%;
   height: 25vh;
+  border-radius: 15px;
 }
 
 #settings {
-  background-color: #0A1128;
   width: 90%;
   height: 70vh;
+  border-radius: 15px;
 }
 
 .title {
-  background-color: #0A1128;
   margin: 0.2% auto 0.2% auto;
   height: auto;
   width: 100%;
-  color: white;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 /* Clear floats after the columns */
@@ -80,12 +104,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color:  rgb(55, 58, 68);
-  border-radius: 20px;
+  background-color: rgb(99, 104, 117);
+  border-radius: 15px;
   border: 6px solid transparent;
   background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(99, 104, 117);
+  background-color: rgb(165, 165, 165);
 }
