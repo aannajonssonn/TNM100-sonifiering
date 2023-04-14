@@ -43,12 +43,14 @@ d3.csv('data/temperature.csv',
         .attr('x', -40)
         .attr('y', 5)
         .text(data.columns[2])
-
-      svg.append('text')
+        .style('fill', 'white')
+        
+        svg.append('text')
         .attr('x', width)
         .attr('y', height - 5)
         .style('text-anchor', 'end')
         .text(data.columns[3])
+        .style('fill', 'white')
 
       // Add Y axis
       const yMin = d3.min(data, function (d) { return +d.value })

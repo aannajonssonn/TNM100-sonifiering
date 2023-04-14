@@ -38,3 +38,7 @@
     text-align: left !important;
     border: 1px solid black;
 }
+
+.black-text {
+    color: black;
+}
