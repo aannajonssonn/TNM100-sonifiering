@@ -1,14 +1,13 @@
 :root {
-  --car-col: #2D35EB;
+  --car-col: #2DA5EB;
 }
 
 .carousel {
-  display: flex;
+  /*display: flex;*/
   height: 15%;
   width: 100%;
   align-items: center;
   font-family: Arial;
-
 }
 
 .carousel__list {
@@ -19,7 +18,7 @@
   height: 100%;
   /*perspective: 100%;*/ /* What does this do? */
   justify-content: center;
-  /*background-color:  #0A1128;*/
+  /*background-color:  orange;*/
 }
 
 .carousel__item {
