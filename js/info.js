@@ -11,8 +11,6 @@ infoExpand.forEach(element => {
     temp.push(object)
 })
 
-console.log(temp)
-
 const htmlBody = document.getElementsByTagName('body')[0]
 htmlBody.onclick = () => {
     temp.forEach(element => {
