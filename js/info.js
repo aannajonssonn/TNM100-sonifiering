@@ -22,6 +22,7 @@ htmlBody.onclick = () => {
 
 temp.forEach(element => {
     element.infoElement.onclick = () => {
+        // If button is clicked (open), then close it when user clicks on it
         if (element.clicked) {
             element.infoElement.style.display = ''
             element.infoElement.children[1].style.display = ''
@@ -37,6 +38,7 @@ temp.forEach(element => {
             return
         }
 
+        // If any info button is clicked, restore all other ones which might be open
         temp.forEach(elem => {
             elem.infoElement.style.display = ''
             elem.infoElement.children[1].style.display = ''
@@ -47,10 +49,11 @@ temp.forEach(element => {
             elem.infoElement.style.textAlign = ''
             elem.infoElement.style.border = ''
             elem.infoElement.style.top = -20 + 'px'
-            element.infoElement.style.boxShadow = ''
+            elem.infoElement.style.boxShadow = ''
             elem.clicked = false
         })
 
+        // Open the info button the user clicked
         element.infoElement.style.display = 'block'
         element.infoElement.children[1].style.display = 'block'
         element.infoElement.style.backgroundColor = 'white'
