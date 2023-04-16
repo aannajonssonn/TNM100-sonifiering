@@ -19,8 +19,33 @@ const svg = d3.select('#graph')
   .append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-// Read the data, temporary
-//d3.csv('data/testdata.csv',
+// Draw the x axis 
+function drawAxis(dataset) {
+  d3.csv(dataset,
+  // Format time variable for x axis
+  function (d) {
+    return { date: d3.timeParse('%Y')(d.date), value: d.value }
+  }).then(
+
+    function (data) {
+      // Add X axis --> it is a date format
+      const x = d3.scaleTime()
+        .domain(d3.extent(data, function (d) { return d.date }))
+        .range([0, width])
+
+      svg.append('g')
+        .attr('transform', 'translate(0,' + height + ')')
+        .call(d3.axisBottom(x))
+
+      // Axis labels
+      svg.append('text')
+        .attr('x', width)
+        .attr('y', height - 5)
+        .style('text-anchor', 'end')
+        .text(data.columns[3])
+        .style('fill', 'white')
+    })
+}
 
 function drawGraph(dataset, category) {
   d3.csv(dataset,
@@ -36,23 +61,11 @@ function drawGraph(dataset, category) {
           .domain(d3.extent(data, function (d) { return d.date }))
           .range([0, width])
 
-        svg.append('g')
-          .attr('transform', 'translate(0,' + height + ')')
-          .call(d3.axisBottom(x))
-
         // Axis labels
         svg.append('text')
           .attr('x', -40)
           .attr('y', 5)
           .text(data.columns[2])
-          .attr('class', category)
-          .style('fill', 'white')
-
-        svg.append('text')
-          .attr('x', width)
-          .attr('y', height - 5)
-          .style('text-anchor', 'end')
-          .text(data.columns[3])
           .attr('class', category)
           .style('fill', 'white')
 
@@ -65,7 +78,7 @@ function drawGraph(dataset, category) {
           .call(d3.axisLeft(y))
 
         // A way to get a random colour
-        const colour = 'rgb(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ')'
+        const randomColour = 'rgb(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ')'
 
         // Add the line
         svg.append('path')
