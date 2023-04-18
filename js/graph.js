@@ -1,8 +1,8 @@
 // Code from https://d3-graph-gallery.com/graph/line_basic.html for d3 v6
 
 // Get CSS elements from the graph div
-var graphCSS = document.getElementById('graph')
-var graphDiv = graphCSS.getBoundingClientRect()
+const graphCSS = document.getElementById('graph')
+const graphDiv = graphCSS.getBoundingClientRect()
 
 // Set the dimensions and margins of the graph
 const offset = { y: 10, x: 5 }
@@ -86,7 +86,7 @@ function drawGraph(dataset, category, id) {
           .attr('class', category)
           .attr('fill', 'none')
           .attr('stroke', color.range()[id])
-          .attr('stroke-width', 1.5)
+          .attr('stroke-width', 2.5)
           .attr('d', d3.line()
             .y(function (d) { return y(d.value) })
             .defined(function (d) { return d.value }) // Ignore null value
