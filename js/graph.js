@@ -10,6 +10,8 @@ const margin = { top: 10, right: 10, bottom: 30, left: 60 },
   width = (graphDiv.width - offset.x) - margin.left - margin.right,
   height = (graphDiv.height - offset.y) - margin.top - margin.bottom
 
+const color = d3.scaleOrdinal(d3.schemeCategory10) // 10 different colors for 10 different numbers
+
 // Append the svg object to the body of the page
 const svg = d3.select('#graph')
   .append('svg')
@@ -22,32 +24,32 @@ const svg = d3.select('#graph')
 // Draw the x axis 
 function drawAxis(dataset) {
   d3.csv(dataset,
-  // Format time variable for x axis
-  function (d) {
-    return { date: d3.timeParse('%Y')(d.date), value: d.value }
-  }).then(
+    // Format time variable for x axis
+    function (d) {
+      return { date: d3.timeParse('%Y')(d.date), value: d.value }
+    }).then(
 
-    function (data) {
-      // Add X axis --> it is a date format
-      const x = d3.scaleTime()
-        .domain(d3.extent(data, function (d) { return d.date }))
-        .range([0, width])
+      function (data) {
+        // Add X axis --> it is a date format
+        const x = d3.scaleTime()
+          .domain(d3.extent(data, function (d) { return d.date }))
+          .range([0, width])
 
-      svg.append('g')
-        .attr('transform', 'translate(0,' + height + ')')
-        .call(d3.axisBottom(x))
+        svg.append('g')
+          .attr('transform', 'translate(0,' + height + ')')
+          .call(d3.axisBottom(x))
 
-      // Axis labels
-      svg.append('text')
-        .attr('x', width)
-        .attr('y', height - 5)
-        .style('text-anchor', 'end')
-        .text(data.columns[3])
-        .style('fill', 'white')
-    })
+        // Axis labels
+        svg.append('text')
+          .attr('x', width)
+          .attr('y', height - 5)
+          .style('text-anchor', 'end')
+          .text(data.columns[3])
+          .style('fill', 'white')
+      })
 }
 
-function drawGraph(dataset, category) {
+function drawGraph(dataset, category, id) {
   d3.csv(dataset,
 
     // Format time variable for x axis
@@ -77,15 +79,12 @@ function drawGraph(dataset, category) {
         svg.append('g')
           .call(d3.axisLeft(y))
 
-        // A way to get a random colour
-        const randomColour = 'rgb(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ')'
-
         // Add the line
         svg.append('path')
           .datum(data)
           .attr('class', category)
           .attr('fill', 'none')
-          .attr('stroke', 'steelblue')
+          .attr('stroke', color.range()[id])
           .attr('stroke-width', 1.5)
           .attr('d', d3.line()
             .y(function (d) { return y(d.value) })

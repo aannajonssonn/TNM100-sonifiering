@@ -8,7 +8,7 @@ dataset1.addEventListener('change', (event) => {
     //console.log(event.target.checked)
     const category = 'temperature'
     if (event.target.checked) {
-        drawGraph('/data/temperature.csv', category)
+        drawGraph('/data/temperature.csv', category, 0)
         return
     }
 
@@ -19,7 +19,7 @@ dataset2.addEventListener('change', (event) => {
     // Read the value of the on-off switch
     const category = 'cars'
     if (event.target.checked) {
-        drawGraph('/data/cars.csv', category)
+        drawGraph('/data/cars.csv', category, 1)
         return
     }
 
@@ -30,7 +30,7 @@ dataset3.addEventListener('change', (event) => {
     // Read the value of the on-off switch
     const category = 'people'
     if (event.target.checked) {
-        drawGraph('/data/befolkning.csv', category)
+        drawGraph('/data/befolkning.csv', category, 2)
         return
     }
 
