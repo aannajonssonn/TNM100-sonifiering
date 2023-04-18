@@ -6,12 +6,12 @@
   /*cursor: pointer;*/
   width: 100%;
   /* Set a width if needed */
-display : inline-block;
-    /* put text left side middle */
+  display: inline-block;
+  /* put text left side middle */
   text-align: left;
   vertical-align: middle;
   /* Make the buttons appear below each other */
-  font-family: Mulish, Noto Serif, Source Sans Pro, Nunito Sans,sans-serif;
+  font-family: Mulish, Noto Serif, Source Sans Pro, Nunito Sans, sans-serif;
   font-size: 1.05rem;
 
 }

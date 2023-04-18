@@ -1,30 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sonifiering</title>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="icon" href="images/note.png" type="image/png">
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/carousel.css">
     <link rel="stylesheet" type="text/css" href="css/datasets.css">
     <link rel="stylesheet" type="text/css" href="css/onoff.css">
     <link rel="stylesheet" type="text/css" href="css/info.css">
+    <link rel="stylesheet" type="text/css" href="css/graph.css">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
-<body>
+<body onload="drawGraph('/data/temperature.csv', 'temperature', 0); drawAxis('/data/temperature.csv')">
     <div class="row">
         <!-- Vänster halva-->
         <div class="column" id="left">
             <div class="box" id="header">
                 <div class="title">
                     <h1>Sonifiering</h1>
-                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ratione tempore possimus sunt pariatur, 
-                        rerum dolores iusto quibusdam placeat deserunt nemo ea architecto molestias aspernatur ipsam? Minima repellendus quae optio.</p>
+                    <p>Sonifiering innebär att datavärden kopplas till ljud och när datavärdena förändras, förändras också ljudet. Det innebär att ljudet
+                        kan användas som en ljudversion av visualisering, och hjälpa till att förtydliga och förenkla förståelsen av förändringar i data.</p>
                 </div>
                 <div></div>
 
@@ -39,35 +41,34 @@
                     <h2>Dataset</h2>
                 </div>
                 <div id="datasets">
-                    <div id="echo" class="onoff">
-                        Dataset 1
+                    <div class="onoff">
+                        Dataset 1 Temperatur
                         <label class="switch">
-    
-                            <input type="checkbox" id="echo-button">
+                            <input type="checkbox" id="dataset1-button" checked>
                             <span class="slider round"></span>
                         </label>
                     </div>
     
-                    <div id="reverb" class="onoff">
-                        Dataset 2
+                    <div class="onoff">
+                        Dataset 2 Bilar
                         <label class="switch">
-                            <input type="checkbox" id="reverb-button">
+                            <input type="checkbox" id="dataset2-button">
                             <span class="slider round"></span>
                         </label>
                     </div>
     
-                    <div id="volume" class="onoff">
-                        Dataset 3
+                    <div class="onoff">
+                        Dataset 3 Befolkning
                         <label class="switch">
-                            <input type="checkbox" id="volume-button">
+                            <input type="checkbox" id="dataset3-button">
                             <span class="slider round"></span>
                         </label>
                     </div>
 
-                    <div id="volume" class="onoff">
+                    <div class="onoff">
                         Dataset 4
                         <label class="switch">
-                            <input type="checkbox" id="volume-button">
+                            <input type="checkbox" id="dataset4-button">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -86,6 +87,13 @@
                         <li class="carousel__item" data-pos="1"></li>
                         <li class="carousel__item" data-pos="2"></li>
                     </ul>
+                    <div class="info left-side">
+                        <i class="icon-info-sign"></i>
+                        <div class="extra-info">
+                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                molestiae quas vel sint commodi repudiandae</p>
+                        </div>
+                    </div>
                 </div>
                 <div id="genre" class="carousel">
                     <ul class="carousel__list">
@@ -95,6 +103,13 @@
                         <li class="carousel__item" data-pos="1"></li>
                         <li class="carousel__item" data-pos="2"></li>
                     </ul>
+                    <div class="info left-side">
+                        <i class="icon-info-sign"></i>
+                        <div class="extra-info">
+                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                molestiae quas vel sint commodi repudiandae</p>
+                        </div>
+                    </div>
                 </div>
                 <div id="filter" class="carousel">
                     <ul class="carousel__list">
@@ -104,6 +119,13 @@
                         <li class="carousel__item" data-pos="1"></li>
                         <li class="carousel__item" data-pos="2"></li>
                     </ul>
+                    <div class="info left-side">
+                        <i class="icon-info-sign"></i>
+                        <div class="extra-info">
+                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                molestiae quas vel sint commodi repudiandae</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="mirror" class="onoff">
@@ -112,7 +134,7 @@
                         <input type="checkbox" id="mirror-button">
                         <span class="slider round"></span>
                     </label>
-                    <div class="info expand-down">
+                    <div class="info">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
                             <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
@@ -126,10 +148,10 @@
                         <input type="checkbox" id="echo-button">
                         <span class="slider round"></span>
                     </label>
-                    <div class="info expand-down">
+                    <div class="info">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
-                            <p class="black-text">Extra info text</p>
+                            <p class="black-text">Ljudet reflekteras från ytor och hörs med fördröjning</p>
                         </div>
                     </div>
                 </div>
@@ -140,10 +162,10 @@
                         <input type="checkbox" id="reverb-button">
                         <span class="slider round"></span>
                     </label>
-                    <div class="info expand-down">
+                    <div class="info">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
-                            <p class="black-text">Extra info text</p>
+                            <p class="black-text">Likt eko, fast kortare fördröjning</p>
                         </div>
                     </div>
                 </div>
@@ -154,13 +176,10 @@
                         <input type="checkbox" id="volume-button">
                         <span class="slider round"></span>
                     </label>
-                    <div class="info expand-down">
+                    <div class="info">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
-                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                                molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                                numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                                optio, eaque rerum!</p>
+                            <p class="black-text">Låt sonifieringen ändra volymen på ljudet istället för hur det låter</p>
                         </div>
                     </div>
                 </div>
@@ -174,10 +193,7 @@
                     <div class="info expand-up">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
-                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                                molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                                numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                                optio, eaque rerum!</p>
+                            <p class="black-text">Låt sonifieringen begränsas till noter, som A B C D E F G</p>
                         </div>
                     </div>
                 </div>
@@ -185,12 +201,12 @@
             </div>
         </div>
     </div>
+    <script src="js/carousel.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/datasets.js"></script>
+    <script src="js/onoff.js"></script>
+    <script src="js/info.js"></script>
 </body>
-<script src="js/carousel.js"></script>
-<script src="js/graph.js"></script>
-<script src="js/datasets.js"></script>
-<script src="js/onoff.js"></script>
-<script src="js/info.js"></script>
 
 
 </html>
