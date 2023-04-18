@@ -16,12 +16,14 @@
   position: relative;
   width: 100%;
   height: 100%;
-  /*perspective: 100%;*/ /* What does this do? */
+  /*perspective: 100%;*/
+  /* What does this do? */
   justify-content: center;
   /*background-color:  orange;*/
 }
 
 .carousel__item {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,47 +38,72 @@
 
 /* Style of each carousel list */
 #waveform>ul>:nth-child(1) {
-  background-color: var(--car-col);
   background-image: url("../images/star.png");
   background-repeat: no-repeat;
   background-size: 70%;
   background-position: center;
 }
 
-#genre>ul>li {
-  /*background: linear-gradient(45deg, #2D35EB 0%, #fdbb2d 100%);*/
+#waveform>ul>:nth-child(3) {
+  background-image: url("../images/sine.png");
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+}
+
+#genre>ul>:nth-child(1) {
+  background-image: url("../images/microphone.png");
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+}
+
+#genre>ul>:nth-child(2) {
+  background-image: url("../images/saxophone.png");
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+}
+
+#genre>ul>:nth-child(3) {
+  background-image: url("../images/guitar.png");
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+}
+
+#genre>ul>:nth-child(4) {
+  background-image: url("../images/clef.png");
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+}
+
+#genre>ul>:nth-child(5) {
+  background-image: url("../images/drum.png");
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+}
+
+#filter>ul>:nth-child(3) {
+  background-image: url("../images/off.png");
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+}
+
+#waveform>ul>li {
   background-color: var(--car-col);
 }
 
-#sound>ul>li {
-  /*background: linear-gradient(45deg, #2D35EB 0%, #22c1c3 100%);*/
+#genre>ul>li {
   background-color: var(--car-col);
 }
 
 #filter>ul>li {
-  /*background: linear-gradient(45deg, #22c1c3 0%, #904ED4 100%);*/
   background-color: var(--car-col);
 }
-
-/*.carousel__item:nth-child(1) {
-  background: linear-gradient(45deg, #2D35EB 0%, #904ED4 100%);
-}
-
-.carousel__item:nth-child(2) {
-  background: linear-gradient(45deg, #2D35EB 0%, #fdbb2d 100%);
-}
-
-.carousel__item:nth-child(3) {
-  background: linear-gradient(45deg, #2D35EB 0%, #22c1c3 100%);
-}
-
-.carousel__item:nth-child(4) {
-  background: linear-gradient(45deg, #fdbb2d 0%, #904ED4 100%);
-}
-
-.carousel__item:nth-child(5) {
-  background: linear-gradient(45deg, #22c1c3 0%, #904ED4 100%);
-}*/
 
 .carousel__item[data-pos="0"] {
   z-index: 5;
