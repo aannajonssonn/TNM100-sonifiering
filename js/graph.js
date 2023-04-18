@@ -78,6 +78,7 @@ function drawGraph(dataset, category, id) {
           .range([height, margin.top])
         svg.append('g')
           .call(d3.axisLeft(y))
+          .attr('class', category)
 
         // Add the line
         svg.append('path')
