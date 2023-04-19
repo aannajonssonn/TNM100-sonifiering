@@ -64,14 +64,6 @@
                             <span class="slider round"></span>
                         </label>
                     </div>
-
-                    <div class="onoff">
-                        Dataset 4
-                        <label class="switch">
-                            <input type="checkbox" id="dataset4-button">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
                 </div>
             </div>
 
@@ -80,6 +72,7 @@
                     <h2>Ljud</h2>
                 </div>
                 <div id="waveform" class="carousel">
+                    <span class="caraousel-label">Vågform</span>
                     <ul class="carousel__list">
                         <li class="carousel__item" data-pos="-2"></li>
                         <li class="carousel__item" data-pos="-1"></li>
@@ -96,6 +89,7 @@
                     </div>
                 </div>
                 <div id="genre" class="carousel">
+                    <span class="caraousel-label">Genre</span>
                     <ul class="carousel__list">
                         <li class="carousel__item" data-pos="-2"></li>
                         <li class="carousel__item" data-pos="-1"></li>
@@ -112,6 +106,7 @@
                     </div>
                 </div>
                 <div id="filter" class="carousel">
+                    <span class="caraousel-label">Filter</span>
                     <ul class="carousel__list">
                         <li class="carousel__item" data-pos="-2"></li>
                         <li class="carousel__item" data-pos="-1"></li>
@@ -127,23 +122,23 @@
                         </div>
                     </div>
                 </div>
-
-                <div id="mirror" class="onoff">
-                    Spegling
+                
+                <div id="volume" class="onoff">
+                    <span class="setting-label">Volym</span>
                     <label class="switch">
-                        <input type="checkbox" id="mirror-button">
+                        <input type="checkbox" id="volume-button">
                         <span class="slider round"></span>
                     </label>
                     <div class="info">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
-                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                                molestiae quas vel sint commodi repudiandae</p>
+                            <p class="black-text">Låt sonifieringen ändra volymen på ljudet istället för hur det låter</p>
                         </div>
                     </div>
                 </div>
+                
                 <div id="echo" class="onoff">
-                    Eko
+                    <span class="setting-label">Eko</span>
                     <label class="switch">
                         <input type="checkbox" id="echo-button">
                         <span class="slider round"></span>
@@ -157,7 +152,7 @@
                 </div>
 
                 <div id="reverb" class="onoff">
-                    Reverb
+                    <span class="setting-label">Reverb</span>
                     <label class="switch">
                         <input type="checkbox" id="reverb-button">
                         <span class="slider round"></span>
@@ -170,22 +165,8 @@
                     </div>
                 </div>
 
-                <div id="volume" class="onoff">
-                    Volym
-                    <label class="switch">
-                        <input type="checkbox" id="volume-button">
-                        <span class="slider round"></span>
-                    </label>
-                    <div class="info">
-                        <i class="icon-info-sign"></i>
-                        <div class="extra-info">
-                            <p class="black-text">Låt sonifieringen ändra volymen på ljudet istället för hur det låter</p>
-                        </div>
-                    </div>
-                </div>
-
                 <div id="discrete" class="onoff">
-                    Diskreta steg
+                    <span class="setting-label">Noter</span>
                     <label class="switch">
                         <input type="checkbox" id="discrete-button">
                         <span class="slider round"></span>
@@ -194,6 +175,21 @@
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
                             <p class="black-text">Låt sonifieringen begränsas till noter, som A B C D E F G</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mirror" class="onoff">
+                    <span class="setting-label">Spegling</span>
+                    <label class="switch">
+                        <input type="checkbox" id="mirror-button">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="info">
+                        <i class="icon-info-sign"></i>
+                        <div class="extra-info">
+                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                                molestiae quas vel sint commodi repudiandae</p>
                         </div>
                     </div>
                 </div>

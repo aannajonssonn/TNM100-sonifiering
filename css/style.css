@@ -113,3 +113,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgb(165, 165, 165);
 }
+
+.setting-label {
+  margin-left: 40px;
+}

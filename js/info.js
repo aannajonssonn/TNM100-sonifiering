@@ -23,7 +23,7 @@ temp.forEach(element => {
         // If button is clicked (open), then close it when user clicks on it
         if (element.clicked) {
             element.infoElement.classList.remove('expanded')
-            element.infoElement.style.top = -20 + 'px'
+            element.infoElement.style.top = -25 + 'px'
             element.infoElement.children[1].style.display = ''
             element.clicked = false
             return
@@ -32,7 +32,7 @@ temp.forEach(element => {
         // If any info button is clicked, restore all other ones which might be open
         temp.forEach(elem => {
             elem.infoElement.classList.remove('expanded')
-            elem.infoElement.style.top = -20 + 'px'
+            elem.infoElement.style.top = -25 + 'px'
             elem.infoElement.children[1].style.display = ''
             elem.clicked = false
         })
@@ -48,7 +48,7 @@ temp.forEach(element => {
                 element.infoElement.style.top = -(heightInfo - 5) + 'px'
             }
             else {
-                element.infoElement.style.top = -20 + 'px'
+                element.infoElement.style.top = -25 + 'px'
             }
         }, 200)
     }

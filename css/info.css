@@ -19,14 +19,14 @@
     width: 20px;
     border-radius: 15px;
     position: relative;
-    top: -20px;
-    left: 150px;
+    top: -25px;
+    left: 0px;
     z-index: 10;
     cursor: pointer;
 }
 
 .left-side {
-    left: 20%;
+    left: 10px;
     margin-top: -6.5vh;
 }
 
