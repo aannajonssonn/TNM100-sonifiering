@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="css/onoff.css">
     <link rel="stylesheet" type="text/css" href="css/info.css">
     <link rel="stylesheet" type="text/css" href="css/graph.css">
+    <link rel="stylesheet" type="text/css" href="css/playbutton.css">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -25,11 +26,15 @@
             <div class="box" id="header">
                 <div class="title">
                     <h1>Sonifiering</h1>
-                    <p>Sonifiering innebär att datavärden kopplas till ljud och när datavärdena förändras, förändras också ljudet. Det innebär att ljudet
-                        kan användas som en ljudversion av visualisering, och hjälpa till att förtydliga och förenkla förståelsen av förändringar i data.</p>
+                    <p>Sonifiering innebär att datavärden kopplas till ljud och när datavärdena förändras, förändras
+                        också ljudet. Det innebär att ljudet
+                        kan användas som en ljudversion av visualisering, och hjälpa till att förtydliga och förenkla
+                        förståelsen av förändringar i data.</p>
                 </div>
-                <div></div>
-
+                <div class="slidecontainer">
+                    <button id="play">Spela!</button>
+                    <input type="range" min="1" max="100" value="1" class="slider-range" id="play-range" disabled>
+                </div>
             </div>
             <div class="box" id="graph"></div>
         </div>
@@ -48,7 +53,7 @@
                             <span class="slider round"></span>
                         </label>
                     </div>
-    
+
                     <div class="onoff">
                         Dataset 2 Bilar
                         <label class="switch">
@@ -56,7 +61,7 @@
                             <span class="slider round"></span>
                         </label>
                     </div>
-    
+
                     <div class="onoff">
                         Dataset 3 Befolkning
                         <label class="switch">
@@ -83,7 +88,8 @@
                     <div class="info left-side">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
-                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                                mollitia,
                                 molestiae quas vel sint commodi repudiandae</p>
                         </div>
                     </div>
@@ -100,7 +106,8 @@
                     <div class="info left-side">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
-                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                                mollitia,
                                 molestiae quas vel sint commodi repudiandae</p>
                         </div>
                     </div>
@@ -117,12 +124,13 @@
                     <div class="info left-side">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
-                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                                mollitia,
                                 molestiae quas vel sint commodi repudiandae</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="volume" class="onoff">
                     <span class="setting-label">Volym</span>
                     <label class="switch">
@@ -132,11 +140,12 @@
                     <div class="info">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
-                            <p class="black-text">Låt sonifieringen ändra volymen på ljudet istället för hur det låter</p>
+                            <p class="black-text">Låt sonifieringen ändra volymen på ljudet istället för hur det låter
+                            </p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="echo" class="onoff">
                     <span class="setting-label">Eko</span>
                     <label class="switch">
@@ -188,7 +197,8 @@
                     <div class="info">
                         <i class="icon-info-sign"></i>
                         <div class="extra-info">
-                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                            <p class="black-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                                mollitia,
                                 molestiae quas vel sint commodi repudiandae</p>
                         </div>
                     </div>
@@ -202,6 +212,7 @@
     <script src="js/datasets.js"></script>
     <script src="js/onoff.js"></script>
     <script src="js/info.js"></script>
+    <script src="js/playbutton.js"></script>
 </body>
 
 
