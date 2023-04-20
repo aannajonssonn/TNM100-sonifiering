@@ -64,13 +64,13 @@ function drawGraph(dataset, category, id) {
           .domain(d3.extent(data, function (d) { return d.date }))
           .range([0, width])
 
-          // Axis labels
+        // Axis labels
         svg.append('text')
-        .attr('x', -40)
-        .attr('y', 5)
-        .text(data.columns[2])
-        .attr('class', category)
-        .style('fill', 'white')
+          .attr('x', -40)
+          .attr('y', 5)
+          .text(data.columns[2])
+          .attr('class', category)
+          .style('fill', 'white')
 
         // Add Y axis
         const yMin = d3.min(data, function (d) { return +d.value })
@@ -81,60 +81,60 @@ function drawGraph(dataset, category, id) {
           .call(d3.axisLeft(y))
           .attr('class', category)
 
-          // Add the line
+        // Add the line
         svg.append('path')
-        .datum(data)
-        .attr('class', category)
-        .attr('fill', 'none')
-        .attr('stroke', color.range()[id])
-        .attr('stroke-width', 2.5)
-        .attr('d', d3.line()
-          .y(function (d) { return y(d.value) })
-          .defined(function (d) { return d.value }) // Ignore null value
-          .x(function (d) { return x(d.date) })
-        )
-          
+          .datum(data)
+          .attr('class', category)
+          .attr('fill', 'none')
+          .attr('stroke', color.range()[id])
+          .attr('stroke-width', 2.5)
+          .attr('d', d3.line()
+            .y(function (d) { return y(d.value) })
+            .defined(function (d) { return d.value }) // Ignore null value
+            .x(function (d) { return x(d.date) })
+          )
 
-      // Code inspired by https://observablehq.com/@vica/d3-linechart-with-hover
-      // Temp styling for debugging, remove later
-      const canvas = d3.select('#graph')
-      const plot_g = svg//d3.select('#graph')
-      const mouse_g = plot_g.append('g').classed('mouse', true).style('display', 'none')
-      mouse_g.append('rect').attr('width', 2).attr('x', -1).attr('height', height).attr('fill', 'lightgray')
-      mouse_g.append('circle').attr('r', 3).attr("stroke", color.range()[id])
-      mouse_g.append('text').style('fill', 'white')
-      
 
-      canvas.on("mouseover", function (mouse) {
-        mouse_g.style('display', 'block')
-      })
+        // Code inspired by https://observablehq.com/@vica/d3-linechart-with-hover
+        // Temp styling for debugging, remove later
+        const canvas = d3.select('#graph')
+        const plot_g = svg//d3.select('#graph')
+        const mouse_g = plot_g.append('g').classed('mouse', true).style('display', 'none')
+        mouse_g.append('rect').attr('width', 2).attr('x', -1).attr('height', height).attr('fill', 'lightgray')
+        mouse_g.append('circle').attr('r', 3).attr("stroke", color.range()[id])
+        mouse_g.append('text').style('fill', 'white')
 
-      const [minYear, maxYear] = d3.extent(data, d => d.date)
-      canvas.on('mousemove', function (mouse) {
 
-        let [xCoord, yCoord] = d3.pointer(mouse)
-        xCoord -= margin.left
-        const ratio = xCoord / width
-        const formatTime = d3.timeFormat('%Y')
-        const parseTime = d3.timeParse('%Y')
-        const currentYear = parseInt(formatTime(minYear)) + parseInt(Math.round(ratio * d3.timeYear.count(minYear, maxYear))) // https://github.com/d3/d3-time
-        let currentValue = data.find(d => {
-          return formatTime(d.date) == currentYear
+        canvas.on("mouseover", function (mouse) {
+          mouse_g.style('display', 'block')
         })
-        if (!currentValue) return
-        currentValue = currentValue.value
-        mouse_g.attr('transform', `translate(${x(parseTime(currentYear))},${0})`)
-        mouse_g.select('text')
-          .text(`År: ${currentYear}`)
-          .attr('y', 100)
-          .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? "start" : "end")
-        mouse_g.select('circle').attr('cy', y(currentValue))
-      })
 
-      canvas.on('mouseout', function (mouse) {
-        mouse_g.style('display', 'none')
+        const [minYear, maxYear] = d3.extent(data, d => d.date)
+        canvas.on('mousemove', function (mouse) {
+
+          let [xCoord, yCoord] = d3.pointer(mouse)
+          xCoord -= margin.left
+          const ratio = xCoord / width
+          const formatTime = d3.timeFormat('%Y')
+          const parseTime = d3.timeParse('%Y')
+          const currentYear = parseInt(formatTime(minYear)) + parseInt(Math.round(ratio * d3.timeYear.count(minYear, maxYear))) // https://github.com/d3/d3-time
+          let currentValue = data.find(d => {
+            return formatTime(d.date) == currentYear
+          })
+          if (!currentValue) return
+          currentValue = currentValue.value
+          mouse_g.attr('transform', `translate(${x(parseTime(currentYear))},${0})`)
+          mouse_g.select('text')
+            .text(`År: ${currentYear}`)
+            .attr('y', 100)
+            .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? "start" : "end")
+          mouse_g.select('circle').attr('cy', y(currentValue))
+        })
+
+        canvas.on('mouseout', function (mouse) {
+          mouse_g.style('display', 'none')
+        })
       })
-    })    
 }
 
 
