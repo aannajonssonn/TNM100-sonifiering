@@ -101,8 +101,9 @@ function drawGraph(dataset, category, id) {
       const plot_g = svg//d3.select('#graph')
       const mouse_g = plot_g.append('g').classed('mouse', true).style('display', 'none')
       mouse_g.append('rect').attr('width', 2).attr('x', -1).attr('height', height).attr('fill', 'lightgray')
-      mouse_g.append('circle').attr('r', 3).attr("stroke", "steelblue")
-      mouse_g.append('text')
+      mouse_g.append('circle').attr('r', 3).attr("stroke", color.range()[id])
+      mouse_g.append('text').style('fill', 'white')
+      
 
       canvas.on("mouseover", function (mouse) {
         mouse_g.style('display', 'block')
@@ -124,14 +125,14 @@ function drawGraph(dataset, category, id) {
         currentValue = currentValue.value
         mouse_g.attr('transform', `translate(${x(parseTime(currentYear))},${0})`)
         mouse_g.select('text')
-          .text(`year: ${currentYear}`)
+          .text(`År: ${currentYear}`)
           .attr('y', 100)
           .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? "start" : "end")
         mouse_g.select('circle').attr('cy', y(currentValue))
       })
 
       canvas.on('mouseout', function (mouse) {
-        //mouse_g.style('display', 'none')
+        mouse_g.style('display', 'none')
       })
     })    
 }
