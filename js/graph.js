@@ -134,6 +134,52 @@ function drawGraph(dataset, category, id) {
         canvas.on('mouseout', function (mouse) {
           mouse_g.style('display', 'none')
         })
+
+        const playButton = document.getElementById('play')
+        function slideRange() {
+          playButton.removeEventListener('click', slideRange, false)
+          const range = document.getElementById('play-range')
+          mouse_g.style('display', 'block')
+
+          timeout(parseInt(range.min), range)
+        }
+
+        function timeout(i, range) {
+          if (parseInt(i) > range.max) {
+            mouse_g.style('display', 'none')
+
+            playButton.addEventListener('click', slideRange, false)
+            return
+          }
+
+          let xCoord = (i + 5) / range.max * width
+          xCoord -= margin.left
+          const ratio = xCoord / width
+          const formatTime = d3.timeFormat('%Y')
+          const parseTime = d3.timeParse('%Y')
+          const currentYear = parseInt(formatTime(minYear)) + parseInt(Math.round(ratio * d3.timeYear.count(minYear, maxYear))) // https://github.com/d3/d3-time
+          let currentValue = data.find(d => {
+            return formatTime(d.date) == currentYear
+          })
+          if (!currentValue) {
+            return
+          }
+          currentValue = currentValue.value
+          mouse_g.attr('transform', `translate(${x(parseTime(currentYear))},${0})`)
+          mouse_g.select('text')
+            .text(`År: ${currentYear}`)
+            .attr('y', 100)
+            .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? "start" : "end")
+          mouse_g.select('circle').attr('cy', y(currentValue))
+
+          setTimeout(function () {
+
+
+            timeout(parseInt(i + 1), range)
+          }, 25)
+        }
+
+        playButton.addEventListener('click', slideRange, false)
       })
 }
 
