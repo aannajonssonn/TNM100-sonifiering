@@ -27,11 +27,10 @@
 }
 
 .slider-range::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: #04AA6D;
-    cursor: pointer;
 }
 
 #play {
@@ -44,6 +43,11 @@
     border-radius: 10px;
 }
 
-#play:hover, .clicked {
+.fa-play {
+    color: white;
+}
+
+#play:hover,
+.clicked {
     opacity: 0.7;
 }
