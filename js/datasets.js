@@ -21,21 +21,23 @@ const dataOptions = [{
 const list = document.getElementById("datasets")
 
 dataOptions.forEach((item) => {
-  const div = document.createElement("div")
-  div.innerText = item.label
-  div.className = 'onoff'
 
-  const label = document.createElement('label')
-  label.className = 'switch'
-
-  const input = document.createElement('input')
-  input.type = 'checkbox'
-  //input.id = ''
-  const span = document.createElement('span')
-  span.className = 'slider round'
-
-  input.appendChild(span)
-  label.appendChild(input)
-  div.appendChild(label)
-  list.appendChild(div)
 })
+
+/*const div = document.createElement("div")
+div.innerText = item.label
+div.className = 'onoff'
+
+const label = document.createElement('label')
+label.className = 'switch'
+
+const input = document.createElement('input')
+input.type = 'checkbox'
+//input.id = ''
+const span = document.createElement('span')
+span.className = 'slider round'
+
+input.appendChild(span)
+label.appendChild(input)
+div.appendChild(label)
+list.appendChild(div)*/

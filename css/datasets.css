@@ -1,18 +1,17 @@
 #datasets div {
-  background-color: orangered;
-  /* Green background */
   border: 0px;
-  /* No border */
   border-radius: 12px;
   margin: 0.25vh auto 0.25vh auto;
-  color: white;
-  /* White text */
   padding: 10px 24px;
-  /* Some padding */
   /*cursor: pointer;*/
-  /* Pointer/hand icon */
   width: 100%;
   /* Set a width if needed */
-  display: block;
+  display: inline-block;
+  /* put text left side middle */
+  text-align: left;
+  vertical-align: middle;
   /* Make the buttons appear below each other */
+  font-family: Mulish, Noto Serif, Source Sans Pro, Nunito Sans, sans-serif;
+  font-size: 1.05rem;
+
 }
