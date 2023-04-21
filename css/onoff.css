@@ -51,6 +51,18 @@ input:checked+.slider {
     background-color: #38CF5B;
 }
 
+input:checked+.dataset1 {
+    background-color: rgb(31, 119, 180);
+}
+
+input:checked+.dataset2 {
+    background-color: rgb(255, 127, 14);
+}
+
+input:checked+.dataset3 {
+    background-color: rgb(44, 160, 44);;
+}
+
 input:focus+.slider {
     box-shadow: 0 0 1px #38CF5B;
 }
