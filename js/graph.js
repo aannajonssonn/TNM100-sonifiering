@@ -111,7 +111,7 @@ function drawGraph(dataset, category, id) {
         })
 
         const [minYear, maxYear] = d3.extent(data, d => d.date)
-        let prevValue
+        let prevYear
         canvas.on('mousemove', function (mouse) {
           let [xCoord, yCoord] = d3.pointer(mouse)
           xCoord -= margin.left
@@ -135,11 +135,25 @@ function drawGraph(dataset, category, id) {
           mouse_g.select('circle').attr('cy', y(currentValue))
 
           // Send current y value to the server
-          if (prevValue != currentValue) {
-            const yValue = {
+          if (prevYear != currentYear) {
+            const carouselList = document.querySelectorAll('.carousel__list')
+            const waveformElements = Array.prototype.slice.call(carouselList[0].children)
+            const currentWaveform = waveformElements.find((elem) => elem.dataset.pos == 0)
+
+            const genreElements = Array.prototype.slice.call(carouselList[1].children)
+            const currentGenre = genreElements.find((elem) => elem.dataset.pos == 0)
+
+            const filterElements = Array.prototype.slice.call(carouselList[2].children)
+            const currentFilter = filterElements.find((elem) => elem.dataset.pos == 0)
+
+            const samplePoint = {
               value: currentValue,
               min: yMin,
-              max: yMax
+              max: yMax,
+
+              waveform: currentWaveform.innerText,
+              genre: currentGenre.innerText,
+              filter: currentFilter.innerText
             }
 
             const options = {
@@ -147,7 +161,7 @@ function drawGraph(dataset, category, id) {
               headers: {
                 "Content-type": "application/json; charset=UTF-8"
               },
-              body: JSON.stringify(yValue)
+              body: JSON.stringify(samplePoint)
             }
 
             const promise = fetch('/data', options)
@@ -158,11 +172,11 @@ function drawGraph(dataset, category, id) {
                 return response.json()
               }
             }).then(result => {
-              console.log(result)
+              // console.log(result)
             })
           }
 
-          prevValue = currentValue
+          prevYear = currentYear
         })
 
         canvas.on('mouseout', function (mouse) {

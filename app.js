@@ -2,10 +2,10 @@
 const express = require("express")
 const app = express()
 const bodyParser = require('body-parser')
-const sc = require("supercolliderjs");
+const sc = require("supercolliderjs")
 
 function scale(num, in_min, in_max, out_min, out_max) {
-    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 }
 
 sc.server.boot().then(server => {
@@ -13,10 +13,10 @@ sc.server.boot().then(server => {
         "/dataset",
         `
       SynthDef("/dataset", { arg out = 0, frequency = 440, frequency1 = 440, frequency2 = 440, soundlevel = 0, wavemix = 0, 
-        attack = 0.001, release = 0.5, clip = 1, noiselevel = 0, lfoLevel = 1, lfoFreq = 10, timbreMixLevel = 0, sineLevel = 0, 
-        triLevel = 0, squareLevel = 0, sawLevel = 0, whiteNoiseLevel = 0, pinkNoiseLevel = 0, crackleNoiseLevel = 0, t_trig = 0, 
-        gate = 0, sustain = 0, lpfCutoff = 2500, bpfCutoff = 2500, hpfCutoff = 2500, mixedSoundLevel = 1, lpfLevel = 0, 
-        bpfLevel = 0, hpfLevel = 0, pw = 0.5, lagTime = 0.01, filterLag = 0.01;
+        attack = 0.001, release = 0.5, clip = 1, noiselevel = 0, lfoLevel = 1, lfoFreq = 10, timbreMixLevel = 0, 
+        sineLevel = 0, triLevel = 0, squareLevel = 0, sawLevel = 0, whiteNoiseLevel = 0, pinkNoiseLevel = 0, crackleNoiseLevel = 0, 
+        t_trig = 0, gate = 0, sustain = 0, lpfCutoff = 200, bpfCutoff = 200, hpfCutoff = 200, mixedSoundLevel = 1, 
+        lpfLevel = 0, bpfLevel = 0, hpfLevel = 0, pw = 0.5, lagTime = 0.01, filterLag = 0.01;
 
         var noise = WhiteNoise.ar(whiteNoiseLevel) + PinkNoise.ar(pinkNoiseLevel) + Dust.ar(440, crackleNoiseLevel);
         var sine0 = SinOsc.ar(frequency);
@@ -75,15 +75,28 @@ sc.server.boot().then(server => {
         const data = req.body // Read the body of the sent message
         //console.log(data.value) // Log the actual value
 
+        // To test: data.test == null ? 0 : 1
         // Send data value to synth
         server.synth(def, {
             frequency: scale(data.value, data.min, data.max, 0, 1) * 500 + 100,
             soundlevel: 1,
-            sineLevel: 1,
+
+            sineLevel: data.waveform == 'Sin' ? 1 : 0,
+            triLevel: data.waveform == 'Tri' ? 1 : 0,
+            squareLevel: data.waveform == 'Square' ? 1 : 0,
+            sawLevel: data.waveform == 'Saw' ? 1 : 0,
+            whiteNoiseLevel: data.waveform == 'Noise' ? 1 : 0,
+            noiselevel: data.waveform == 'Noise' ? 1 : 0,
+
+            lpfLevel: data.filter == 'LP' ? 1 : 0,
+            hpfLevel: data.filter == 'HP' ? 1 : 0,
+            bpfLevel: data.filter == 'BP' ? 1 : 0,
+
+
             t_trig: 1,
             gate: 1,
         })
 
-        res.json(Math.round(scale(data.value, data.min, data.max, 0, 1) * 500 + 100)) // Send back the value (to not crash)
+        res.json('Success!') // Send back the value (to not crash)
     })
 })
