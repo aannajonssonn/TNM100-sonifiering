@@ -46,28 +46,35 @@
 }
 
 /* Style of each carousel list */
-#waveform>ul>:nth-child(1) {
-  background-image: url("../images/star.png");
+#waveform>ul>:nth-child(2) {
+  background-image: url("../images/triangle.png");
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 100%;
   background-position: center;
 }
 
 #waveform>ul>:nth-child(3) {
-  background-image: url("../images/sine.png");
+  background-image: url("../images/sinus.png");
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 100%;
   background-position: center;
 }
 
-#genre>ul>:nth-child(1) {
-  background-image: url("../images/microphone.png");
+#waveform>ul>:nth-child(4) {
+  background-image: url("../images/square.png");
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 100%;
   background-position: center;
 }
 
 #genre>ul>:nth-child(2) {
+  background-image: url("../images/pop.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
+#genre>ul>:nth-child(1) {
   background-image: url("../images/saxophone.png");
   background-repeat: no-repeat;
   background-size: 70%;
@@ -75,14 +82,14 @@
 }
 
 #genre>ul>:nth-child(3) {
-  background-image: url("../images/guitar.png");
+  background-image: url("../images/akust.png");
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 100%;
   background-position: center;
 }
 
 #genre>ul>:nth-child(4) {
-  background-image: url("../images/clef.png");
+  background-image: url("../images/klassisk.png");
   background-repeat: no-repeat;
   background-size: 70%;
   background-position: center;
@@ -95,12 +102,26 @@
   background-position: center;
 }
 
+#filter>ul>:nth-child(2) {
+  background-image: url("../images/brus.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
 #filter>ul>:nth-child(3) {
   background-image: url("../images/off.png");
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 100%;
   background-position: center;
 }
+#filter>ul>:nth-child(4) {
+  background-image: url("../images/brus.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
 
 #waveform>ul>li {
   background-color: var(--car-col);
