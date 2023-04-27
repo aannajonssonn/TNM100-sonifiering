@@ -74,6 +74,7 @@ function drawGraph(dataset, category, id) {
 
         // Add Y axis
         const yMin = d3.min(data, function (d) { return +d.value })
+        const yMax = d3.max(data, function (d) { return +d.value })
         const y = d3.scaleLinear()
           .domain([yMin - 0.5 * Math.abs(yMin), d3.max(data, function (d) { return +d.value })])
           .range([height, margin.top])
@@ -110,8 +111,8 @@ function drawGraph(dataset, category, id) {
         })
 
         const [minYear, maxYear] = d3.extent(data, d => d.date)
+        let prevValue
         canvas.on('mousemove', function (mouse) {
-
           let [xCoord, yCoord] = d3.pointer(mouse)
           xCoord -= margin.left
           const ratio = xCoord / width
@@ -134,28 +135,34 @@ function drawGraph(dataset, category, id) {
           mouse_g.select('circle').attr('cy', y(currentValue))
 
           // Send current y value to the server
-          const yValue = {
-            value: currentValue
-          }
-
-          const options = {
-            method: 'POST',
-            headers: {
-              "Content-type": "application/json; charset=UTF-8"
-            },
-            body: JSON.stringify(yValue)
-          }
-
-          const promise = fetch('/data', options)
-          promise.then(response => {
-            if (!response.ok) {
-              console.error(response)
-            } else {
-              return response.json()
+          if (prevValue != currentValue) {
+            const yValue = {
+              value: currentValue,
+              min: yMin,
+              max: yMax
             }
-          }).then(result => {
-            // console.log(result)
-          })
+
+            const options = {
+              method: 'POST',
+              headers: {
+                "Content-type": "application/json; charset=UTF-8"
+              },
+              body: JSON.stringify(yValue)
+            }
+
+            const promise = fetch('/data', options)
+            promise.then(response => {
+              if (!response.ok) {
+                console.error(response)
+              } else {
+                return response.json()
+              }
+            }).then(result => {
+              console.log(result)
+            })
+          }
+
+          prevValue = currentValue
         })
 
         canvas.on('mouseout', function (mouse) {
