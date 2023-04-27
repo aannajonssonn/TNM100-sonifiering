@@ -118,17 +118,44 @@ function drawGraph(dataset, category, id) {
           const formatTime = d3.timeFormat('%Y')
           const parseTime = d3.timeParse('%Y')
           const currentYear = parseInt(formatTime(minYear)) + parseInt(Math.round(ratio * d3.timeYear.count(minYear, maxYear))) // https://github.com/d3/d3-time
+          //if(!svg.selectAll(".cars")){console.log("hej")}
+          //console.log(data);
           let currentValue = data.find(d => {
             return formatTime(d.date) == currentYear
           })
           if (!currentValue) return
           currentValue = currentValue.value
+          // console.log(currentValue);
           mouse_g.attr('transform', `translate(${x(parseTime(currentYear))},${0})`)
           mouse_g.select('text')
             .text(`År: ${currentYear}`)
             .attr('y', 100)
             .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? "start" : "end")
           mouse_g.select('circle').attr('cy', y(currentValue))
+
+          // Send current y value to the server
+          const yValue = {
+            value: currentValue
+          }
+
+          const options = {
+            method: 'POST',
+            headers: {
+              "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(yValue)
+          }
+
+          const promise = fetch('/data', options)
+          promise.then(response => {
+            if (!response.ok) {
+              console.error(response)
+            } else {
+              return response.json()
+            }
+          }).then(result => {
+            // console.log(result)
+          })
         })
 
         canvas.on('mouseout', function (mouse) {

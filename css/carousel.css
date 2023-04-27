@@ -54,9 +54,9 @@
 }
 
 #waveform>ul>:nth-child(3) {
-  background-image: url("../images/sinus.png");
+  background-image: url("../images/sawtooth.png");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 70%;
   background-position: center;
 }
 
