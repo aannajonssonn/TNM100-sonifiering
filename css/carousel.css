@@ -46,79 +46,110 @@
 }
 
 /* Style of each carousel list */
-#waveform>ul>:nth-child(2) {
-  background-image: url("../images/triangle.png");
+#waveform>ul>:nth-child(1) {
+  background-image: url("../images/tri.png"); 
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 95%;
+  background-position: center;
+}
+
+#waveform>ul>:nth-child(2) {
+  background-image: url("../images/saw.png");
+  background-repeat: no-repeat;
+  background-size: 95%;
   background-position: center;
 }
 
 #waveform>ul>:nth-child(3) {
-  background-image: url("../images/sinus.png");
+  background-image: url("../images/sin.png");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 95%;
   background-position: center;
 }
 
 #waveform>ul>:nth-child(4) {
   background-image: url("../images/square.png");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 95%;
+  background-position: center;
+}
+
+#waveform>ul>:nth-child(5) {
+  background-image: url("../images/brus.png");
+  background-repeat: no-repeat;
+  background-size: 95%;
+  background-position: center;
+}
+
+/*GENRE*/
+#genre>ul>:nth-child(1) {
+  background-image: url("../images/jazz.png");
+  background-repeat: no-repeat;
+  background-size: 95%;
   background-position: center;
 }
 
 #genre>ul>:nth-child(2) {
   background-image: url("../images/pop.png");
   background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center;
-}
-
-#genre>ul>:nth-child(1) {
-  background-image: url("../images/saxophone.png");
-  background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 95%;
   background-position: center;
 }
 
 #genre>ul>:nth-child(3) {
-  background-image: url("../images/akust.png");
+  background-image: url("../images/off.png");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 95%;
   background-position: center;
 }
 
 #genre>ul>:nth-child(4) {
-  background-image: url("../images/klassisk.png");
+  background-image: url("../images/hiphop.png");
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 95%;
   background-position: center;
 }
 
 #genre>ul>:nth-child(5) {
-  background-image: url("../images/drum.png");
+  background-image: url("../images/klassiskt.png");
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 95%;
+  background-position: center;
+}
+
+/*FILTER*/
+#filter>ul>:nth-child(1) {
+  background-image: url("../images/highpass.png");
+  background-repeat: no-repeat;
+  background-size: 95%;
   background-position: center;
 }
 
 #filter>ul>:nth-child(2) {
-  background-image: url("../images/brus.png");
+  background-image: url("../images/lowpass.png");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 95%;
   background-position: center;
 }
 
 #filter>ul>:nth-child(3) {
   background-image: url("../images/off.png");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 95%;
   background-position: center;
 }
+
 #filter>ul>:nth-child(4) {
-  background-image: url("../images/brus.png");
+  background-image: url("../images/reject.png");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 95%;
+  background-position: center;
+}
+
+#filter>ul>:nth-child(5) {
+  background-image: url("../images/bandpass.png");
+  background-repeat: no-repeat;
+  background-size: 95%;
   background-position: center;
 }
 
