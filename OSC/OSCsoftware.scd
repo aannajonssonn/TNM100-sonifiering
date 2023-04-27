@@ -3,10 +3,10 @@ NetAddr.localAddr;
 
 (
 
-OSCdef.new(\Dataset,
+OSCdef.new(\dataset,
 	{
 	arg msg;
-
+	msg = "hej!";
 	~dataset = msg[1].asString;
 	//~dataset.postln;
 

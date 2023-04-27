@@ -14,13 +14,20 @@ dataset1.addEventListener('change', (event) => {
 
     removeGraph(category)
 })
-
+ // TODO: fixa detta så att hover kan vara tre olika dataset, en array av dataset
 dataset2.addEventListener('change', (event) => {
     // Read the value of the on-off switch
     const category = 'cars'
     if (event.target.checked) {
         drawGraph('/data/cars.csv', category, 1)
         return
+    }
+    // check if event from dataset 1 is checked
+    //console.log(dataset1.checked);
+    if (dataset1.checked) { 
+        const category = 'temperature';
+        removeGraph("temperature");
+        drawGraph('/data/temperature.csv', category, 0);
     }
 
     removeGraph(category)

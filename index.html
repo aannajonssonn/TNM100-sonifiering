@@ -34,12 +34,13 @@
                         kan användas som en ljudversion av visualisering, och hjälpa till att förtydliga och förenkla
                         förståelsen av förändringar i data.</p>
                     <p>Testa hur ljudet förändras med olika dataset eller med olika ljudinställningar! </p>
-                </div>
-                <div class="slidecontainer">
-                    <div class="temp" id="play">
-                        <i class="fas fa-play"></i>
+                    <div class="slidecontainer">
+                        <div class="temp" id="play">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <input type="range" min="1" max="100" value="1" class="slider-range" id="play-range" disabled>
                     </div>
-                    <input type="range" min="1" max="100" value="1" class="slider-range" id="play-range" disabled>
+
                 </div>
             </div>
             <div class="box" id="graph"></div>
@@ -83,7 +84,7 @@
                     <h2>Ljud</h2>
                 </div>
                 <div id="waveform" class="carousel">
-                    <span class="caraousel-label">Vågform</span>
+                    <span class="caraousel-label">Grundljud</span>
                     <ul class="carousel__list">
                         <li class="carousel__item" data-pos="-2"></li>
                         <li class="carousel__item" data-pos="-1"></li>
@@ -138,78 +139,80 @@
                     </div>
                 </div>
 
-                <div id="volume" class="onoff">
-                    <span class="setting-label">Volym</span>
-                    <label class="switch">
-                        <input type="checkbox" id="volume-button">
-                        <span class="slider round"></span>
-                    </label>
-                    <div class="info">
-                        <i class="icon-info-sign"></i>
-                        <div class="extra-info">
-                            <p class="black-text">Låt sonifieringen ändra volymen på ljudet istället för hur det låter
-                            </p>
+                <div class="leftsettings"> <!-- left och rightsettings gör att de passar i fönstret-->
+                    <div id="echo" class="onoff">
+                        <span class="setting-label">Eko</span>
+                        <label class="switch">
+                            <input type="checkbox" id="echo-button">
+                            <span class="slider round"></span>
+                        </label>
+                        <div class="info">
+                            <i class="icon-info-sign"></i>
+                            <div class="extra-info">
+                                <p class="black-text">Ljudet reflekteras från ytor och hörs med fördröjning</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="reverb" class="onoff">
+                        <span class="setting-label">Reverb</span>
+                        <label class="switch">
+                            <input type="checkbox" id="reverb-button">
+                            <span class="slider round"></span>
+                        </label>
+                        <div class="info">
+                            <i class="icon-info-sign"></i>
+                            <div class="extra-info">
+                                <p class="black-text">Likt eko, fast kortare fördröjning</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="rightsettings">
+                    <div id="volume" class="onoff">
+                        <span class="setting-label">Volym</span>
+                        <label class="switch">
+                            <input type="checkbox" id="volume-button">
+                            <span class="slider round"></span>
+                        </label>
+                        <div class="info">
+                            <i class="icon-info-sign"></i>
+                            <div class="extra-info">
+                                <p class="black-text">Låt sonifieringen ändra volymen på ljudet istället för hur det låter
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="discrete" class="onoff">
+                        <span class="setting-label">Noter</span>
+                        <label class="switch">
+                            <input type="checkbox" id="discrete-button">
+                            <span class="slider round"></span>
+                        </label>
+                        <div class="info expand-up">
+                            <i class="icon-info-sign"></i>
+                            <div class="extra-info">
+                                <p class="black-text">Låt sonifieringen begränsas till noter, som A B C D E F G</p>
+                            </div>
+                        </div>
+                    </div>
 
-                <div id="echo" class="onoff">
-                    <span class="setting-label">Eko</span>
-                    <label class="switch">
-                        <input type="checkbox" id="echo-button">
-                        <span class="slider round"></span>
-                    </label>
-                    <div class="info">
-                        <i class="icon-info-sign"></i>
-                        <div class="extra-info">
-                            <p class="black-text">Ljudet reflekteras från ytor och hörs med fördröjning</p>
+                    <div id="mirror" class="onoff">
+                        <span class="setting-label">Spegling</span>
+                        <label class="switch">
+                            <input type="checkbox" id="mirror-button">
+                            <span class="slider round"></span>
+                        </label>
+                        <div class="info">
+                            <i class="icon-info-sign"></i>
+                            <div class="extra-info">
+                                <p class="black-text">Välj om höga grafvärden ska representeras av låga frekvenser
+                                    respektive höga frekvenser.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div id="reverb" class="onoff">
-                    <span class="setting-label">Reverb</span>
-                    <label class="switch">
-                        <input type="checkbox" id="reverb-button">
-                        <span class="slider round"></span>
-                    </label>
-                    <div class="info">
-                        <i class="icon-info-sign"></i>
-                        <div class="extra-info">
-                            <p class="black-text">Likt eko, fast kortare fördröjning</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="discrete" class="onoff">
-                    <span class="setting-label">Noter</span>
-                    <label class="switch">
-                        <input type="checkbox" id="discrete-button">
-                        <span class="slider round"></span>
-                    </label>
-                    <div class="info expand-up">
-                        <i class="icon-info-sign"></i>
-                        <div class="extra-info">
-                            <p class="black-text">Låt sonifieringen begränsas till noter, som A B C D E F G</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="mirror" class="onoff">
-                    <span class="setting-label">Spegling</span>
-                    <label class="switch">
-                        <input type="checkbox" id="mirror-button">
-                        <span class="slider round"></span>
-                    </label>
-                    <div class="info">
-                        <i class="icon-info-sign"></i>
-                        <div class="extra-info">
-                            <p class="black-text">Välj om höga grafvärden ska representeras av låga frekvenser
-                                respektive höga frekvenser.</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>

@@ -53,7 +53,7 @@ wss.on("connection", ws => {
         args: [
           {
             type: "s",
-            value: 10 //data.dataset.dataset
+            value: data.dataset.dataset
 
           }
         ]
