@@ -21,6 +21,7 @@ const svg = d3.select('#graph')
   .append('g')
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
+
 // Draw the x axis 
 function drawAxis(dataset) {
   d3.csv(dataset,
@@ -92,8 +93,96 @@ function drawGraph(dataset, category, id) {
             .defined(function (d) { return d.value }) // Ignore null value
             .x(function (d) { return x(d.date) })
           )
+
+
+        // Code inspired by https://observablehq.com/@vica/d3-linechart-with-hover
+        // Temp styling for debugging, remove later
+        const canvas = d3.select('#graph')
+        const plot_g = svg//d3.select('#graph')
+        const mouse_g = plot_g.append('g').classed('mouse', true).style('display', 'none')
+        mouse_g.append('rect').attr('width', 2).attr('x', -1).attr('height', height).attr('fill', 'lightgray')
+        mouse_g.append('circle').attr('r', 3).attr("stroke", color.range()[id])
+        mouse_g.append('text').style('fill', 'white')
+
+
+        canvas.on("mouseover", function (mouse) {
+          mouse_g.style('display', 'block')
+        })
+
+        const [minYear, maxYear] = d3.extent(data, d => d.date)
+        canvas.on('mousemove', function (mouse) {
+
+          let [xCoord, yCoord] = d3.pointer(mouse)
+          xCoord -= margin.left
+          const ratio = xCoord / width
+          const formatTime = d3.timeFormat('%Y')
+          const parseTime = d3.timeParse('%Y')
+          const currentYear = parseInt(formatTime(minYear)) + parseInt(Math.round(ratio * d3.timeYear.count(minYear, maxYear))) // https://github.com/d3/d3-time
+          let currentValue = data.find(d => {
+            return formatTime(d.date) == currentYear
+          })
+          if (!currentValue) return
+          currentValue = currentValue.value
+          mouse_g.attr('transform', `translate(${x(parseTime(currentYear))},${0})`)
+          mouse_g.select('text')
+            .text(`År: ${currentYear}`)
+            .attr('y', 100)
+            .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? "start" : "end")
+          mouse_g.select('circle').attr('cy', y(currentValue))
+        })
+
+        canvas.on('mouseout', function (mouse) {
+          mouse_g.style('display', 'none')
+        })
+
+        const playButton = document.getElementById('play')
+        function slideRange() {
+          playButton.removeEventListener('click', slideRange, false)
+          const range = document.getElementById('play-range')
+          mouse_g.style('display', 'block')
+
+          timeout(parseInt(range.min), range)
+        }
+
+        function timeout(i, range) {
+          if (parseInt(i) > range.max) {
+            mouse_g.style('display', 'none')
+
+            playButton.addEventListener('click', slideRange, false)
+            return
+          }
+
+          let xCoord = (i + 5) / range.max * width
+          xCoord -= margin.left
+          const ratio = xCoord / width
+          const formatTime = d3.timeFormat('%Y')
+          const parseTime = d3.timeParse('%Y')
+          const currentYear = parseInt(formatTime(minYear)) + parseInt(Math.round(ratio * d3.timeYear.count(minYear, maxYear))) // https://github.com/d3/d3-time
+          let currentValue = data.find(d => {
+            return formatTime(d.date) == currentYear
+          })
+          if (!currentValue) {
+            return
+          }
+          currentValue = currentValue.value
+          mouse_g.attr('transform', `translate(${x(parseTime(currentYear))},${0})`)
+          mouse_g.select('text')
+            .text(`År: ${currentYear}`)
+            .attr('y', 100)
+            .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? "start" : "end")
+          mouse_g.select('circle').attr('cy', y(currentValue))
+
+          setTimeout(function () {
+
+
+            timeout(parseInt(i + 1), range)
+          }, 25)
+        }
+
+        playButton.addEventListener('click', slideRange, false)
       })
 }
+
 
 function removeGraph(category) {
   svg.selectAll('.' + category).remove()
