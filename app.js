@@ -8,21 +8,11 @@ function linearScale(num, in_min, in_max, out_min, out_max) {
     return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 }
 
-// https://www.youtube.com/watch?v=9c4YRBuweeA
 function exponentialScale(num, in_min, in_max) {
-    // a * r ^ (x - b)
-    //out_max = out_min * r ^ (in_max - in_min)
-    //r = (out_max / out_min) ^(1 / (in_max - in_min))
-
-    //out_max / r^(in_max - in_min) = out_min
-    //r = (out_min / out_max) ^ (-1/(in_max - in_min))
-
     const out_min = 110
     const out_max = 1760
 
-    const r = Math.pow(out_min / out_max, -1 / (in_max - in_min))
-
-    return Math.pow(out_min * r, num - in_min) 
+    return Math.pow(out_max / out_min, (num - in_min) / (in_max - in_min)) * out_min
 }
 
 sc.server.boot().then(server => {
@@ -112,6 +102,6 @@ sc.server.boot().then(server => {
             gate: 1,
         })
 
-        res.json('Success!') // Send back the value (to not crash)
+        res.json(exponentialScale(data.value, data.min, data.max)) // Send back the value (to not crash)
     })
 })
