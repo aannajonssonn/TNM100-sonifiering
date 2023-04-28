@@ -11,13 +11,16 @@ function linearScale(num, in_min, in_max, out_min, out_max) {
 // https://www.youtube.com/watch?v=9c4YRBuweeA
 function exponentialScale(num, in_min, in_max) {
     // a * r ^ (x - b)
-    //out_max == out_min * r ^ (in_max - in_min)
+    //out_max = out_min * r ^ (in_max - in_min)
     //r = (out_max / out_min) ^(1 / (in_max - in_min))
+
+    //out_max / r^(in_max - in_min) = out_min
+    //r = (out_min / out_max) ^ (-1/(in_max - in_min))
 
     const out_min = 110
     const out_max = 1760
 
-    const r = Math.pow(out_max / out_min, 1 / (in_max - in_min))
+    const r = Math.pow(out_min / out_max, -1 / (in_max - in_min))
 
     return Math.pow(out_min * r, num - in_min) 
 }
@@ -82,20 +85,16 @@ sc.server.boot().then(server => {
     app.get("/", (req, res) => {
         res.sendFile(__dirname + "/index.html")
     })
-    let prevValue
     // https://stackoverflow.com/questions/9177049/express-js-req-body-undefined
     const jsonParser = bodyParser.json()
     app.post("/data", jsonParser, async (req, res) => {
         const data = req.body // Read the body of the sent message
-        //console.log(data.value) // Log the actual value
 
-        // To test: data.test == null ? 0 : 1
         // Send data value to synth
         server.synth(def, {
-            frequency: linearScale(data.value, data.min, data.max, 0, 1) * 500 + 100,
-            /*frequency: exponentialScale(data.value, data.min, data.max),
-            frequency1: exponentialScale(data.value, data.min, data.max),
-            frequency2: exponentialScale(data.value, data.min, data.max),*/
+            frequency: data.discrete ? exponentialScale(data.value, data.min, data.max) : linearScale(data.value, data.min, data.max, 100, 1200),
+            frequency1: data.discrete ? exponentialScale(data.value, data.min, data.max) : 440,
+            frequency2: data.discrete ? exponentialScale(data.value, data.min, data.max) : 440,
             soundlevel: 1,
 
             sineLevel: data.waveform == 'Sin' ? 1 : 0,
@@ -108,9 +107,6 @@ sc.server.boot().then(server => {
             lpfLevel: data.filter == 'LP' ? 1 : 0,
             hpfLevel: data.filter == 'HP' ? 1 : 0,
             bpfLevel: data.filter == 'BP' ? 1 : 0,
-
-            /*frequency2: data.discrete === true ? linearScale(data.value, data.min, data.max, 0, 1) * 500 + 100 : 440,
-            frequency3: data.discrete === true ? linearScale(data.value, data.min, data.max, 0, 1) * 500 + 100 : 440,*/
 
             t_trig: 1,
             gate: 1,
