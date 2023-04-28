@@ -146,6 +146,12 @@ function drawGraph(dataset, category, id) {
             const filterElements = Array.prototype.slice.call(carouselList[2].children)
             const currentFilter = filterElements.find((elem) => elem.dataset.pos == 0)
 
+            const echoChecked = document.getElementById('echo').children[1].children[0].checked
+            const reverbChecked = document.getElementById('reverb').children[1].children[0].checked
+            const volumeChecked = document.getElementById('volume').children[1].children[0].checked
+            const discreteChecked = document.getElementById('discrete').children[1].children[0].checked
+            const mirrorChecked = document.getElementById('mirror').children[1].children[0].checked
+
             const samplePoint = {
               value: currentValue,
               min: yMin,
@@ -153,7 +159,13 @@ function drawGraph(dataset, category, id) {
 
               waveform: currentWaveform.innerText,
               genre: currentGenre.innerText,
-              filter: currentFilter.innerText
+              filter: currentFilter.innerText,
+
+              echo: echoChecked,
+              reverb: reverbChecked,
+              volume: volumeChecked,
+              discrete: discreteChecked,
+              mirror: mirrorChecked
             }
 
             const options = {
@@ -172,7 +184,7 @@ function drawGraph(dataset, category, id) {
                 return response.json()
               }
             }).then(result => {
-              // console.log(result)
+              console.log(result)
             })
           }
 

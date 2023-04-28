@@ -4,8 +4,22 @@ const app = express()
 const bodyParser = require('body-parser')
 const sc = require("supercolliderjs")
 
-function scale(num, in_min, in_max, out_min, out_max) {
+function linearScale(num, in_min, in_max, out_min, out_max) {
     return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+}
+
+// https://www.youtube.com/watch?v=9c4YRBuweeA
+function exponentialScale(num, in_min, in_max) {
+    // a * r ^ (x - b)
+    //out_max == out_min * r ^ (in_max - in_min)
+    //r = (out_max / out_min) ^(1 / (in_max - in_min))
+
+    const out_min = 110
+    const out_max = 1760
+
+    const r = Math.pow(out_max / out_min, 1 / (in_max - in_min))
+
+    return Math.pow(out_min * r, num - in_min) 
 }
 
 sc.server.boot().then(server => {
@@ -16,7 +30,7 @@ sc.server.boot().then(server => {
         attack = 0.001, release = 0.5, clip = 1, noiselevel = 0, lfoLevel = 1, lfoFreq = 10, timbreMixLevel = 0, 
         sineLevel = 0, triLevel = 0, squareLevel = 0, sawLevel = 0, whiteNoiseLevel = 0, pinkNoiseLevel = 0, crackleNoiseLevel = 0, 
         t_trig = 0, gate = 0, sustain = 0, lpfCutoff = 200, bpfCutoff = 200, hpfCutoff = 200, mixedSoundLevel = 1, 
-        lpfLevel = 0, bpfLevel = 0, hpfLevel = 0, pw = 0.5, lagTime = 0.01, filterLag = 0.01;
+        lpfLevel = 0, bpfLevel = 0, hpfLevel = 0, pw = 0.5, lagTime = 0.01, filterLag = 0.01;  
 
         var noise = WhiteNoise.ar(whiteNoiseLevel) + PinkNoise.ar(pinkNoiseLevel) + Dust.ar(440, crackleNoiseLevel);
         var sine0 = SinOsc.ar(frequency);
@@ -78,7 +92,10 @@ sc.server.boot().then(server => {
         // To test: data.test == null ? 0 : 1
         // Send data value to synth
         server.synth(def, {
-            frequency: scale(data.value, data.min, data.max, 0, 1) * 500 + 100,
+            frequency: linearScale(data.value, data.min, data.max, 0, 1) * 500 + 100,
+            /*frequency: exponentialScale(data.value, data.min, data.max),
+            frequency1: exponentialScale(data.value, data.min, data.max),
+            frequency2: exponentialScale(data.value, data.min, data.max),*/
             soundlevel: 1,
 
             sineLevel: data.waveform == 'Sin' ? 1 : 0,
@@ -92,6 +109,8 @@ sc.server.boot().then(server => {
             hpfLevel: data.filter == 'HP' ? 1 : 0,
             bpfLevel: data.filter == 'BP' ? 1 : 0,
 
+            /*frequency2: data.discrete === true ? linearScale(data.value, data.min, data.max, 0, 1) * 500 + 100 : 440,
+            frequency3: data.discrete === true ? linearScale(data.value, data.min, data.max, 0, 1) * 500 + 100 : 440,*/
 
             t_trig: 1,
             gate: 1,
