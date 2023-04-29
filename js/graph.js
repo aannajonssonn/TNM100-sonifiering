@@ -3,6 +3,14 @@
 // Get CSS elements from the graph div
 const graphCSS = document.getElementById('graph')
 const graphDiv = graphCSS.getBoundingClientRect()
+let mouseDown = 0
+
+document.body.onmousedown = function() { 
+  ++mouseDown
+}
+document.body.onmouseup = function() {
+  --mouseDown
+}
 
 // Set the dimensions and margins of the graph
 const offset = { y: 10, x: 5 }
@@ -105,14 +113,17 @@ function drawGraph(dataset, category, id) {
         mouse_g.append('circle').attr('r', 3).attr("stroke", color.range()[id])
         mouse_g.append('text').style('fill', 'white')
 
-
+        // Now useless
         canvas.on("mouseover", function (mouse) {
-          mouse_g.style('display', 'block')
+          //mouse_g.style('display', 'block')
         })
 
         const [minYear, maxYear] = d3.extent(data, d => d.date)
         let prevYear
         canvas.on('mousemove', function (mouse) {
+          if (!mouseDown) return
+          mouse_g.style('display', 'block')
+
           let [xCoord, yCoord] = d3.pointer(mouse)
           xCoord -= margin.left
           const ratio = xCoord / width
