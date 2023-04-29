@@ -184,7 +184,7 @@ function drawGraph(dataset, category, id) {
                 return response.json()
               }
             }).then(result => {
-              console.log(result)
+              //console.log(result)
             })
           }
 

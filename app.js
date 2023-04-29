@@ -80,12 +80,17 @@ sc.server.boot().then(server => {
     app.post("/data", jsonParser, async (req, res) => {
         const data = req.body // Read the body of the sent message
 
+        // Data ranges
+        const minFreq = data.mirror ? 1200 : 100
+        const maxFreq = data.mirror ? 100 : 1200
+
         // Send data value to synth
         server.synth(def, {
-            frequency: data.discrete ? exponentialScale(data.value, data.min, data.max) : linearScale(data.value, data.min, data.max, 100, 1200),
-            frequency1: data.discrete ? exponentialScale(data.value, data.min, data.max) : 440,
-            frequency2: data.discrete ? exponentialScale(data.value, data.min, data.max) : 440,
-            soundlevel: 1,
+            frequency: data.discrete ? exponentialScale(data.value, data.min, data.max) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
+            frequency1: data.discrete ? exponentialScale(data.value, data.min, data.max) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
+            frequency2: data.discrete ? exponentialScale(data.value, data.min, data.max) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
+
+            soundlevel: data.volume ? linearScale(data.value, data.min, data.max, data.mirror ? 1 : 0, data.mirror ? 0 : 1) : 1,
 
             sineLevel: data.waveform == 'Sin' ? 1 : 0,
             triLevel: data.waveform == 'Tri' ? 1 : 0,
