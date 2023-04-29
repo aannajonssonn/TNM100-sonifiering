@@ -8,10 +8,7 @@ function linearScale(num, in_min, in_max, out_min, out_max) {
     return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 }
 
-function exponentialScale(num, in_min, in_max) {
-    const out_min = 110
-    const out_max = 1760
-
+function exponentialScale(num, in_min, in_max, out_min, out_max) {
     return Math.pow(out_max / out_min, (num - in_min) / (in_max - in_min)) * out_min
 }
 
@@ -22,8 +19,8 @@ sc.server.boot().then(server => {
       SynthDef("/dataset", { arg out = 0, frequency = 440, frequency1 = 440, frequency2 = 440, soundlevel = 0, wavemix = 0, 
         attack = 0.001, release = 0.5, clip = 1, noiselevel = 0, lfoLevel = 1, lfoFreq = 10, timbreMixLevel = 0, 
         sineLevel = 0, triLevel = 0, squareLevel = 0, sawLevel = 0, whiteNoiseLevel = 0, pinkNoiseLevel = 0, crackleNoiseLevel = 0, 
-        t_trig = 0, gate = 0, sustain = 0, lpfCutoff = 200, bpfCutoff = 200, hpfCutoff = 200, mixedSoundLevel = 1, 
-        lpfLevel = 0, bpfLevel = 0, hpfLevel = 0, pw = 0.5, lagTime = 0.01, filterLag = 0.01;  
+        t_trig = 0, gate = 0, sustain = 0, lpfCutoff = 200, bpfCutoff = 200, hpfCutoff = 200, brfCutoff = 200, mixedSoundLevel = 1, 
+        lpfLevel = 0, bpfLevel = 0, hpfLevel = 0, brfLevel = 0, pw = 0.5, lagTime = 0.01, filterLag = 0.01;  
 
         var noise = WhiteNoise.ar(whiteNoiseLevel) + PinkNoise.ar(pinkNoiseLevel) + Dust.ar(440, crackleNoiseLevel);
         var sine0 = SinOsc.ar(frequency);
@@ -50,7 +47,8 @@ sc.server.boot().then(server => {
         var lowPassFiltered = LPF.ar(mixedSound, lpfCutoff.lag(filterLag));
         var bandPassFiltered = BPF.ar(mixedSound, bpfCutoff.lag(filterLag), 1);
         var highPassFiltered = HPF.ar(mixedSound, hpfCutoff.lag(filterLag));
-        var filteredSound = (mixedSound * mixedSoundLevel) + (lowPassFiltered * lpfLevel.lag(lagTime)) + (bandPassFiltered * bpfLevel.lag(lagTime)) + (highPassFiltered * hpfLevel.lag(lagTime));
+        var bandRejectFiltered = BRF.ar(mixedSound, brfCutoff.lag(filterLag), 1);
+        var filteredSound = (mixedSound * mixedSoundLevel) + (lowPassFiltered * lpfLevel.lag(lagTime)) + (bandPassFiltered * bpfLevel.lag(lagTime)) + (highPassFiltered * hpfLevel.lag(lagTime)) + (bandRejectFiltered * brfLevel.lag(lagTime));
         var lfo = LFPulse.kr(lfoFreq, width: 0.4).range(lfoLevel, 1);
         var envelope1 = EnvGen.kr(Env.perc(attack, release, 1, -4), t_trig);
         var envelope2 = EnvGen.kr(Env.adsr(attack, 0.5, 1, release, 1, -4), gate);
@@ -77,6 +75,7 @@ sc.server.boot().then(server => {
     })
     // https://stackoverflow.com/questions/9177049/express-js-req-body-undefined
     const jsonParser = bodyParser.json()
+    let prevFreq
     app.post("/data", jsonParser, async (req, res) => {
         const data = req.body // Read the body of the sent message
 
@@ -86,12 +85,13 @@ sc.server.boot().then(server => {
 
         // Send data value to synth
         server.synth(def, {
-            frequency: data.discrete ? exponentialScale(data.value, data.min, data.max) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
-            frequency1: data.discrete ? exponentialScale(data.value, data.min, data.max) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
-            frequency2: data.discrete ? exponentialScale(data.value, data.min, data.max) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
+            frequency: data.discrete ? exponentialScale(data.value, data.min, data.max, 110, 1760) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
+            frequency1: data.discrete ? exponentialScale(data.value, data.min, data.max, 110, 1760) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
+            frequency2: data.discrete ? exponentialScale(data.value, data.min, data.max, 110, 1760) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
 
             soundlevel: data.volume ? linearScale(data.value, data.min, data.max, data.mirror ? 1 : 0, data.mirror ? 0 : 1) : 1,
 
+            // Waveform
             sineLevel: data.waveform == 'Sin' ? 1 : 0,
             triLevel: data.waveform == 'Tri' ? 1 : 0,
             squareLevel: data.waveform == 'Square' ? 1 : 0,
@@ -99,14 +99,29 @@ sc.server.boot().then(server => {
             whiteNoiseLevel: data.waveform == 'Noise' ? 1 : 0,
             noiselevel: data.waveform == 'Noise' ? 1 : 0,
 
+            // Filter
             lpfLevel: data.filter == 'LP' ? 1 : 0,
+            lpfCutoff: 100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500),
+            
             hpfLevel: data.filter == 'HP' ? 1 : 0,
+            hpfCutoff: 100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500),
+            
             bpfLevel: data.filter == 'BP' ? 1 : 0,
+            bpfCutoff: 100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500),
+
+            brfLevel: data.filter == 'BR' ? 1 : 0,
+            brfCutoff: 100 + 800 - exponentialScale(data.value, data.min, data.max, 100, 800),
+
+            filterLag: Math.abs(100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500) - prevFreq) > 4000 ? 1 : 0.01,
+            mixedSoundLevel: data.filter == 'Off' ? 1 : 0,
 
             t_trig: 1,
             gate: 1,
         })
 
+        prevFreq = 100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500)
+        if (data.filter == 'BR') prevFreq = 100 + 800 - exponentialScale(data.value, data.min, data.max, 100, 800)
+    
         res.json(exponentialScale(data.value, data.min, data.max)) // Send back the value (to not crash)
     })
 })

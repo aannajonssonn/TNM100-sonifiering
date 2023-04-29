@@ -121,7 +121,10 @@ function drawGraph(dataset, category, id) {
         const [minYear, maxYear] = d3.extent(data, d => d.date)
         let prevYear
         canvas.on('mousemove', function (mouse) {
-          if (!mouseDown) return
+          if (!mouseDown) {
+            mouse_g.style('display', 'none')
+            return
+          }
           mouse_g.style('display', 'block')
 
           let [xCoord, yCoord] = d3.pointer(mouse)
