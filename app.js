@@ -88,11 +88,14 @@ sc.server.boot({memSize: '262144'}).then(async server => {
         const minFreq = data.mirror ? 1200 : 100
         const maxFreq = data.mirror ? 100 : 1200
 
+        const minNote = data.mirror ? 1760 : 110
+        const maxNote = data.mirror ? 110 : 1760
+
         // Send data value to synth
         server.synth(sonificationVoice, {
-            frequency: data.discrete ? exponentialScale(data.value, data.min, data.max, 110, 1760) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
-            frequency1: data.discrete ? exponentialScale(data.value, data.min, data.max, 110, 1760) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
-            frequency2: data.discrete ? exponentialScale(data.value, data.min, data.max, 110, 1760) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
+            frequency: data.discrete ? exponentialScale(data.value, data.min, data.max, minNote, maxNote) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
+            frequency1: data.discrete ? exponentialScale(data.value, data.min, data.max, minNote, maxNote) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
+            frequency2: data.discrete ? exponentialScale(data.value, data.min, data.max, minNote, maxNote) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
 
             soundlevel: data.volume ? linearScale(data.value, data.min, data.max, data.mirror ? 0.5 : 0, data.mirror ? 0 : 0.5) : 0.5,
 
