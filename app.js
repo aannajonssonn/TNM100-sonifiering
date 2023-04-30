@@ -3,6 +3,7 @@ const express = require("express")
 const app = express()
 const bodyParser = require('body-parser')
 const sc = require("supercolliderjs")
+const { linear } = require("@supercollider/server/lib/mapping")
 
 function linearScale(num, in_min, in_max, out_min, out_max) {
     return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
@@ -12,15 +13,16 @@ function exponentialScale(num, in_min, in_max, out_min, out_max) {
     return Math.pow(out_max / out_min, (num - in_min) / (in_max - in_min)) * out_min
 }
 
-sc.server.boot().then(server => {
-    const def = server.synthDef(
+sc.server.boot({memSize: '262144'}).then(async server => {
+    const sonificationVoice = await server.synthDef(
         "/dataset",
         `
       SynthDef("/dataset", { arg out = 0, frequency = 440, frequency1 = 440, frequency2 = 440, soundlevel = 0, wavemix = 0, 
         attack = 0.001, release = 0.5, clip = 1, noiselevel = 0, lfoLevel = 1, lfoFreq = 10, timbreMixLevel = 0, 
         sineLevel = 0, triLevel = 0, squareLevel = 0, sawLevel = 0, whiteNoiseLevel = 0, pinkNoiseLevel = 0, crackleNoiseLevel = 0, 
         t_trig = 0, gate = 0, sustain = 0, lpfCutoff = 200, bpfCutoff = 200, hpfCutoff = 200, brfCutoff = 200, mixedSoundLevel = 1, 
-        lpfLevel = 0, bpfLevel = 0, hpfLevel = 0, brfLevel = 0, pw = 0.5, lagTime = 0.01, filterLag = 0.01;  
+        lpfLevel = 0, bpfLevel = 0, hpfLevel = 0, brfLevel = 0, pw = 0.5, lagTime = 0.01, filterLag = 0.01,
+        reverbMix = 0.1, reverberation = 0.5, delayTime = 0.33, decay = 0.5, delayLevel = 0;  
 
         var noise = WhiteNoise.ar(whiteNoiseLevel) + PinkNoise.ar(pinkNoiseLevel) + Dust.ar(440, crackleNoiseLevel);
         var sine0 = SinOsc.ar(frequency);
@@ -56,8 +58,11 @@ sc.server.boot().then(server => {
         var enveloped2 = (filteredSound * envelope2) * lfo;
         var enveloped = (sustain * enveloped2) + ((1 - sustain) * enveloped1);
         var output = enveloped;
-        var stereoOut = [output, output] * soundlevel;
+        //var stereoOut = [output, output] * soundlevel;
 
+        var deleyed = output + (LocalIn.ar(2) * delayLevel);
+        var stereoOut = FreeVerb2.ar(deleyed[0], deleyed[1], reverbMix, reverberation, 0.1, 1) * soundlevel;
+        LocalOut.ar(DelayL.ar(deleyed, 0.5, delayTime) * decay);
         Out.ar(out, stereoOut);
       });
     `,
@@ -84,12 +89,12 @@ sc.server.boot().then(server => {
         const maxFreq = data.mirror ? 100 : 1200
 
         // Send data value to synth
-        server.synth(def, {
+        server.synth(sonificationVoice, {
             frequency: data.discrete ? exponentialScale(data.value, data.min, data.max, 110, 1760) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
             frequency1: data.discrete ? exponentialScale(data.value, data.min, data.max, 110, 1760) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
             frequency2: data.discrete ? exponentialScale(data.value, data.min, data.max, 110, 1760) : linearScale(data.value, data.min, data.max, minFreq, maxFreq),
 
-            soundlevel: data.volume ? linearScale(data.value, data.min, data.max, data.mirror ? 1 : 0, data.mirror ? 0 : 1) : 1,
+            soundlevel: data.volume ? linearScale(data.value, data.min, data.max, data.mirror ? 0.5 : 0, data.mirror ? 0 : 0.5) : 0.5,
 
             // Waveform
             sineLevel: data.waveform == 'Sin' ? 1 : 0,
@@ -115,6 +120,14 @@ sc.server.boot().then(server => {
             filterLag: Math.abs(100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500) - prevFreq) > 4000 ? 1 : 0.01,
             mixedSoundLevel: data.filter == 'Off' ? 1 : 0,
 
+            // Echo
+            delayTime: exponentialScale(data.value, data.min, data.max, 1.01, 1.5) - 1,
+            decay: linearScale(data.value, data.min, data.max, 1.3, 1.75) - 1,
+            delayLevel: data.echo ? 1 : 0,
+
+            reverbMix: data.reverb ? exponentialScale(data.value, data.min, data.max, 1, 1.5) - 1 : 0.1,
+            reverberation: data.reverb ? exponentialScale(data.value, data.min, data.max, 1.5, 2) - 1 : 0.5,
+
             t_trig: 1,
             gate: 1,
         })
@@ -122,6 +135,6 @@ sc.server.boot().then(server => {
         prevFreq = 100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500)
         if (data.filter == 'BR') prevFreq = 100 + 800 - exponentialScale(data.value, data.min, data.max, 100, 800)
     
-        res.json(exponentialScale(data.value, data.min, data.max)) // Send back the value (to not crash)
+        res.json('Success') // Send back the value (to not crash)
     })
 })
