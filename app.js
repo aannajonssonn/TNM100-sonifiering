@@ -3,7 +3,6 @@ const express = require("express")
 const app = express()
 const bodyParser = require('body-parser')
 const sc = require("supercolliderjs")
-const { linear } = require("@supercollider/server/lib/mapping")
 
 function linearScale(num, in_min, in_max, out_min, out_max) {
     return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
@@ -13,7 +12,21 @@ function exponentialScale(num, in_min, in_max, out_min, out_max) {
     return Math.pow(out_max / out_min, (num - in_min) / (in_max - in_min)) * out_min
 }
 
-sc.server.boot({memSize: '262144'}).then(async server => {
+app.listen(3000, () => {
+    console.log("Application started and Listening on port http://127.0.0.1:3000/")
+})
+
+// serve your css as static
+app.use(express.static(__dirname))
+
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/index.html")
+})
+// https://stackoverflow.com/questions/9177049/express-js-req-body-undefined
+const jsonParser = bodyParser.json()
+let prevFreq
+
+sc.server.boot({ memSize: '262144', maxSynthDefs: '4096' }).then(async server => {
     const sonificationVoice = await server.synthDef(
         "/dataset",
         `
@@ -68,19 +81,6 @@ sc.server.boot({memSize: '262144'}).then(async server => {
     `,
     )
 
-    app.listen(3000, () => {
-        console.log("Application started and Listening on port http://127.0.0.1:3000/")
-    })
-
-    // serve your css as static
-    app.use(express.static(__dirname))
-
-    app.get("/", (req, res) => {
-        res.sendFile(__dirname + "/index.html")
-    })
-    // https://stackoverflow.com/questions/9177049/express-js-req-body-undefined
-    const jsonParser = bodyParser.json()
-    let prevFreq
     app.post("/data", jsonParser, async (req, res) => {
         const data = req.body // Read the body of the sent message
 
@@ -110,10 +110,10 @@ sc.server.boot({memSize: '262144'}).then(async server => {
             // Filter
             lpfLevel: data.filter == 'LP' ? 1 : 0,
             lpfCutoff: 100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500),
-            
+
             hpfLevel: data.filter == 'HP' ? 1 : 0,
             hpfCutoff: 100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500),
-            
+
             bpfLevel: data.filter == 'BP' ? 1 : 0,
             bpfCutoff: 100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500),
 
@@ -137,7 +137,7 @@ sc.server.boot({memSize: '262144'}).then(async server => {
 
         prevFreq = 100 + 500 - exponentialScale(data.value, data.min, data.max, 100, 500)
         if (data.filter == 'BR') prevFreq = 100 + 800 - exponentialScale(data.value, data.min, data.max, 100, 800)
-    
+
         res.json('Success') // Send back the value (to not crash)
     })
 })
