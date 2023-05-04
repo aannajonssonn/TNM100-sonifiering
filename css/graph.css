@@ -2,6 +2,6 @@
     user-select: none;
 }
 
-svg, g, circle {
+svg, g, circle, rect {
     transition: all 0s ease;
 }
