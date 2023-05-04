@@ -1,45 +1,52 @@
 
-// Add event listener for on-off switches
 const dataset1 = document.querySelector('#dataset1-button')
 const dataset2 = document.querySelector('#dataset2-button')
 const dataset3 = document.querySelector('#dataset3-button')
-dataset1.addEventListener('change', (event) => {
-    // Read the value of the on-off switch
-    //console.log(event.target.checked)
-    const category = 'temperature'
-    if (event.target.checked) {
-        drawGraph('/data/temperature.csv', category, 0)
-        return
-    }
+console.log(dataset1)
+// array of datasets
+const datasets = [[dataset1, 'temperature', '/data/temperature.csv'], [dataset2, 'cars', '/data/cars.csv'], [dataset3, 'people', '/data/befolkning.csv']]
+// listening to the event listener and sending the csv link, category and index to the drawGraph function for the checked dataset
 
-    removeGraph(category)
-})
- // TODO: fixa detta så att hover kan vara tre olika dataset, en array av dataset
-dataset2.addEventListener('change', (event) => {
-    // Read the value of the on-off switch
-    const category = 'cars'
-    if (event.target.checked) {
-        drawGraph('/data/cars.csv', category, 1)
-        return
-    }
-    // check if event from dataset 1 is checked
-    //console.log(dataset1.checked);
-    if (dataset1.checked) { 
-        const category = 'temperature';
-        removeGraph("temperature");
-        drawGraph('/data/temperature.csv', category, 0);
-    }
 
-    removeGraph(category)
+// if a change is detected in any checkbox, all graphs are redrawn
+dataset1.addEventListener('change', function () {
+  if (dataset1.checked) {
+    drawGraph(datasets[0][2], datasets[0][1], 0)
+    // uncheck the other checkboxes, remove the graphs
+    dataset2.checked = false
+    dataset3.checked = false
+    removeGraph(datasets[1][1])
+    removeGraph(datasets[2][1])
+  } else {
+    removeGraph(datasets[0][1])
+  }
 })
 
-dataset3.addEventListener('change', (event) => {
-    // Read the value of the on-off switch
-    const category = 'people'
-    if (event.target.checked) {
-        drawGraph('/data/befolkning.csv', category, 2)
-        return
-    }
-
-    removeGraph(category)
+// repeat for the other checkboxes
+dataset2.addEventListener('change', function () {
+  if (dataset2.checked) {
+    drawGraph(datasets[1][2], datasets[1][1], 1)
+    dataset1.checked = false
+    dataset3.checked = false
+    removeGraph(datasets[0][1])
+    removeGraph(datasets[2][1])
+  } else {
+    removeGraph(datasets[1][1])
+  }
 })
+
+dataset3.addEventListener('change', function () {
+  if (dataset3.checked) {
+    drawGraph(datasets[2][2], datasets[2][1], 2)
+    dataset1.checked = false
+    dataset2.checked = false
+    removeGraph(datasets[0][1])
+    removeGraph(datasets[1][1])
+  } else {
+    removeGraph(datasets[2][1])
+  }
+})
+
+
+
+
