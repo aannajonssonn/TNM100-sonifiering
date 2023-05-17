@@ -23,8 +23,10 @@ h1, h2, h3, h4{
 
 body {
   background-color: var(--background-col);
-  /*background-image: url("background.jpg");
-  background-attachment: fixed;*/
+  background-image: url("background3.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
   margin: 0;
 }
 
