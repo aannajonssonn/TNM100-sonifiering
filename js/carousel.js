@@ -1,6 +1,4 @@
 // Source code: https://codepen.io/frise/pen/mZvKpe 
-
-const state = {}
 const carouselList = document.querySelectorAll('.carousel__list')
 
 carouselList.forEach((list) => {

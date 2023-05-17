@@ -2,7 +2,6 @@
 const dataset1 = document.querySelector('#dataset1-button')
 const dataset2 = document.querySelector('#dataset2-button')
 const dataset3 = document.querySelector('#dataset3-button')
-console.log(dataset1)
 // array of datasets
 const datasets = [[dataset1, 'temperature', '/data/temperature.csv'], [dataset2, 'cars', '/data/cars.csv'], [dataset3, 'people', '/data/befolkning.csv']]
 // listening to the event listener and sending the csv link, category and index to the drawGraph function for the checked dataset

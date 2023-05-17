@@ -14,8 +14,11 @@
   color: var(--font-col);
 }
 
-h1, h2, h3, h4{
-  font-family: Yeseva One, Lora, Nunito Sans, sans-serif; 
+h1,
+h2,
+h3,
+h4 {
+  font-family: Yeseva One, Lora, Nunito Sans, sans-serif;
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -23,7 +26,7 @@ h1, h2, h3, h4{
 
 body {
   background-color: var(--background-col);
-  background-image: url("background3.jpg");
+  background-image: url("background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;

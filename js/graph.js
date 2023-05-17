@@ -23,7 +23,7 @@ const color = d3.scaleOrdinal(d3.schemeCategory10) // 10 different colors for 10
 // Append the svg object to the body of the page
 const svg = d3.select('#graph')
   .append('svg')
-  .attr('transform', 'translate(' + offset.x / 3 + "," + offset.y / 3 + ')')
+  .attr('transform', 'translate(' + offset.x / 3 + ',' + offset.y / 3 + ')')
   .attr('width', width + margin.left + margin.right)
   .attr('height', height + margin.top + margin.bottom)
   .append('g')
@@ -107,14 +107,14 @@ function drawGraph(dataset, category, id) {
         // Code inspired by https://observablehq.com/@vica/d3-linechart-with-hover
         // Style the interaction
         const canvas = d3.select('#graph')
-        const plot_g = svg //d3.select('#graph')
+        const plot_g = svg
         const mouse_g = plot_g.append('g').classed('mouse', true).style('display', 'none')
         mouse_g.append('rect').attr('width', 2).attr('x', -1).attr('height', height).attr('fill', 'lightgray')
 
         mouse_g.append('rect').attr('width', width).attr('y', -1).attr('height', 2).attr('class', 'horizontal').attr('fill', 'lightgray')
         mouse_g.append('text').attr('class', 'value').style('fill', 'white')
 
-        mouse_g.append('circle').attr('r', 3).attr("stroke", color.range()[id])
+        mouse_g.append('circle').attr('r', 3).attr('stroke', color.range()[id])
         mouse_g.append('text').attr('class', 'year').style('fill', 'white')
 
         const [minYear, maxYear] = d3.extent(data, d => d.date)
@@ -189,7 +189,7 @@ function drawGraph(dataset, category, id) {
           mouse_g.selectAll('.year')
             .text(`År: ${currentYear}`)
             .attr('y', 100)
-            .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? "start" : "end")
+            .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? 'start' : 'end')
           mouse_g.select('circle').attr('cy', y(currentValue))
 
           mouse_g.selectAll('.horizontal').attr('transform', `translate(${-x(parseTime(currentYear))},${y(currentValue)})`)
@@ -197,7 +197,7 @@ function drawGraph(dataset, category, id) {
             .text(`Värde: ${currentValue}`)
             .attr('x', -x(parseTime(currentYear)) + 100)
             .attr('y', y(currentValue) - 2)
-            .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? "start" : "end")
+            .attr('text-anchor', currentYear < (minYear + maxYear) / 2 ? 'start' : 'end')
 
           // Send current y value to the server
           if (prevYear != currentYear) {
@@ -205,8 +205,8 @@ function drawGraph(dataset, category, id) {
             const waveformElements = Array.prototype.slice.call(carouselList[0].children)
             const currentWaveform = waveformElements.find((elem) => elem.dataset.pos == 0)
 
-            //const genreElements = Array.prototype.slice.call(carouselList[1].children)
-            //const currentGenre = genreElements.find((elem) => elem.dataset.pos == 0)
+            const genreElements = Array.prototype.slice.call(carouselList[1].children)
+            const currentGenre = genreElements.find((elem) => elem.dataset.pos == 0)
 
             const filterElements = Array.prototype.slice.call(carouselList[2].children)
             const currentFilter = filterElements.find((elem) => elem.dataset.pos == 0)
@@ -223,7 +223,7 @@ function drawGraph(dataset, category, id) {
               max: yMax,
 
               waveform: currentWaveform.innerText,
-              //genre: currentGenre.innerText,
+              genre: currentGenre.innerText,
               filter: currentFilter.innerText,
 
               echo: echoChecked,
@@ -236,7 +236,7 @@ function drawGraph(dataset, category, id) {
             const options = {
               method: 'POST',
               headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
               },
               body: JSON.stringify(samplePoint)
             }

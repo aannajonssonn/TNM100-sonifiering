@@ -3,7 +3,6 @@
 }
 
 .carousel {
-  /*display: flex;*/
   height: 15%;
   width: 100%;
   align-items: center;
@@ -17,8 +16,6 @@
   padding-right: 20%;
   width: 100%;
   height: 100%;
-  /*perspective: 100%;*/
-  /* What does this do? */
   justify-content: right;
 }
 

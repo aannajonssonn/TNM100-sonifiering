@@ -1,6 +1,5 @@
 const infoExpand = document.querySelectorAll('.info')
-
-const temp = []
+const infoButtons = []
 
 infoExpand.forEach(element => {
     const object = {
@@ -8,17 +7,10 @@ infoExpand.forEach(element => {
         clicked: false
     }
 
-    temp.push(object)
+    infoButtons.push(object)
 })
 
-const htmlBody = document.getElementsByTagName('body')[0]
-htmlBody.onclick = () => {
-    temp.forEach(element => {
-        // Do stuff when clicking the entire body
-    })
-}
-
-temp.forEach(element => {
+infoButtons.forEach(element => {
     element.infoElement.onclick = () => {
         // If button is clicked (open), then close it when user clicks on it
         if (element.clicked) {
@@ -30,7 +22,7 @@ temp.forEach(element => {
         }
 
         // If any info button is clicked, restore all other ones which might be open
-        temp.forEach(elem => {
+        infoButtons.forEach(elem => {
             elem.infoElement.classList.remove('expanded')
             elem.infoElement.style.top = -25 + 'px'
             elem.infoElement.children[1].style.display = ''
